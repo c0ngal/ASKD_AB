@@ -1,0 +1,17 @@
+../Core/Src/MemoryFunctions.c:31:7:FZavN	1
+../Core/Src/MemoryFunctions.c:47:7:FDIzg	1
+../Core/Src/MemoryFunctions.c:66:7:FND	1
+../Core/Src/MemoryFunctions.c:91:6:RdArxByte1636RR4	2
+../Core/Src/MemoryFunctions.c:100:7:ZapZN	2
+../Core/Src/MemoryFunctions.c:120:7:ZapDI	2
+../Core/Src/MemoryFunctions.c:169:6:RTekI	2
+../Core/Src/MemoryFunctions.c:194:7:ChtArx	7
+../Core/Src/MemoryFunctions.c:255:7:WTekI	2
+../Core/Src/MemoryFunctions.c:273:7:ZapArx	3
+../Core/Src/MemoryFunctions.c:326:14:read_record	2
+../Core/Src/MemoryFunctions.c:346:7:ChtRArx	5
+../Core/Src/MemoryFunctions.c:391:7:ZapRArx	3
+../Core/Src/MemoryFunctions.c:449:7:EraseRabArx	1
+../Core/Src/MemoryFunctions.c:460:7:EraseArx	1
+../Core/Src/MemoryFunctions.c:469:7:EraseTekI	1
+../Core/Src/MemoryFunctions.c:473:7:InitMemory	5

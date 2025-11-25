@@ -1,0 +1,10 @@
+../Core/Src/UART.c:18:6:uart_use1	4	static
+../Core/Src/UART.c:19:6:uart_use6	4	static
+../Core/Src/UART.c:21:6:sendDebug	16	static
+../Core/Src/UART.c:37:7:SendByte	16	static
+../Core/Src/UART.c:51:9:GetByte	24	static
+../Core/Src/UART.c:66:9:GetByteTimeout	24	static
+../Core/Src/UART.c:82:14:uart_receive	24	static
+../Core/Src/UART.c:99:14:uart_transmit_str	24	static
+../Core/Src/UART.c:123:14:uart_transmit_ch	24	static
+../Core/Src/UART.c:140:14:uart_transmit	24	static

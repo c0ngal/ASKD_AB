@@ -1,0 +1,3 @@
+../Core/Src/ADC.c:10:7:ADC0	5
+../Core/Src/ADC.c:50:7:Read_ADC1	5
+../Core/Src/ADC.c:88:7:ADCR	5

@@ -1,0 +1,2 @@
+../Core/Src/global.c:34:6:delay_5us	16	static
+../Core/Src/global.c:39:6:delay_ms	16	static

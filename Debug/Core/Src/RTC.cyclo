@@ -1,0 +1,11 @@
+../Core/Src/RTC.c:8:6:MX_RTC_Init	1
+../Core/Src/RTC.c:19:6:setTime	1
+../Core/Src/RTC.c:30:10:getTime	1
+../Core/Src/RTC.c:40:9:getHours	1
+../Core/Src/RTC.c:50:9:getMinutes	1
+../Core/Src/RTC.c:60:9:getSeconds	1
+../Core/Src/RTC.c:70:9:getWeekDay	2
+../Core/Src/RTC.c:83:6:setDate	1
+../Core/Src/RTC.c:94:10:getYear	1
+../Core/Src/RTC.c:103:9:getMonth	1
+../Core/Src/RTC.c:113:9:getDay	1

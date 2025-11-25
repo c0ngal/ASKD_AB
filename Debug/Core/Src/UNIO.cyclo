@@ -1,0 +1,10 @@
+../Core/Src/UNIO.c:28:8:getSaveDigitalOut	1
+../Core/Src/UNIO.c:39:6:delay_init	1
+../Core/Src/UNIO.c:44:6:delay_us	3
+../Core/Src/UNIO.c:73:8:setUNIO	7
+../Core/Src/UNIO.c:102:8:setUNIOByte	3
+../Core/Src/UNIO.c:111:8:getUNIO	7
+../Core/Src/UNIO.c:262:10:getADC_SPI	2
+../Core/Src/UNIO.c:293:8:getDigitalInSPI	3
+../Core/Src/UNIO.c:343:10:getDigitalInWordSPI	3
+../Core/Src/UNIO.c:373:8:setDigitalOutSPI	2

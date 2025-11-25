@@ -1,0 +1,12 @@
+../Core/Src/flash_ext.c:7:20:CS_L	1
+../Core/Src/flash_ext.c:8:20:CS_H	1
+../Core/Src/flash_ext.c:10:26:txrx	1
+../Core/Src/flash_ext.c:13:26:tx	1
+../Core/Src/flash_ext.c:16:26:rx	1
+../Core/Src/flash_ext.c:19:26:write_enable	1
+../Core/Src/flash_ext.c:27:6:flash_init	1
+../Core/Src/flash_ext.c:34:19:flash_wait_busy	5
+../Core/Src/flash_ext.c:51:19:flash_read	2
+../Core/Src/flash_ext.c:64:19:flash_erase_sector	3
+../Core/Src/flash_ext.c:78:19:flash_write	7
+../Core/Src/flash_ext.c:108:10:flash_read_id	1
