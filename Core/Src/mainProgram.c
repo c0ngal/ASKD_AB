@@ -1773,7 +1773,7 @@ L74:  Rbyte = GetByte(AdrRY);
      ZnX[i] =  Rbyte;
      i++;
   if (Rbyte != 0x03) goto L74;
-  d =  ZnX[1];
+  d =  ZnX[i-2];
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/
@@ -1989,6 +1989,7 @@ L72:
     i = 1;
     do{
         izmZn = Read_ADC1();
+        //HAL_Delay(100);
         ZnPU[i] =  izmZn;
         i++;
     }while(i < 11);

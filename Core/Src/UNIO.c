@@ -308,6 +308,8 @@ int8_t getDigitalInSPI(uint8_t num){
 
 	HAL_GPIO_WritePin(FSS_ISA_GPIO_Port,FSS_ISA_Pin,GPIO_PIN_SET);
 
+
+
 	if (Rx != 0x06 || (val & 0xC0) != 0xC0)
 		return -1;
 
@@ -346,6 +348,22 @@ uint16_t getDigitalInWordSPI(uint8_t num){
 	uint16_t res = 0;
 	uint8_t Cmd[4] = {0xF0,DIGITAL_IN_ID,0xA1,0xA2};
 
+	/*HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1,Cmd,1,1000);//байт начала сообщения
+	HAL_SPI_Transmit(&hspi1,&Cmd[1],1,1000);//номер платы
+	if (num < 16)
+		HAL_SPI_Transmit(&hspi1,&Cmd[2],1,1000);//номер ввода
+	else
+		HAL_SPI_Transmit(&hspi1,&Cmd[3],1,1000);//номер ввода
+	//HAL_Delay(1);
+	delay_us(delaySPIBetweenByte);// HAL_Delay(1);
+	HAL_SPI_TransmitReceive(&hspi1,&num,&val1,1,1000);//значение	ввода
+	//HAL_Delay(1);
+	delay_us(delaySPIBetweenByte);// HAL_Delay(1);
+	HAL_SPI_TransmitReceive(&hspi1,&num,&val2,1,1000);//значение	ввода
+	HAL_SPI_TransmitReceive(&hspi1,&num,&Rx,1,1000);//квитанция
+
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);*/
 	HAL_GPIO_WritePin(FSS_ISA_GPIO_Port,FSS_ISA_Pin,GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi3,Cmd,1,1000);//байт начала сообщения
 	HAL_SPI_Transmit(&hspi3,&Cmd[1],1,1000);//номер платы

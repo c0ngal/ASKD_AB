@@ -13,7 +13,7 @@ float ADC0(){   //TODO
 	for (i=0;i<3;i++){
 		//res = getADC(0);	//запрос данных с 1-ого АЦП
 		res = getADC_SPI(0);
-		if (res == -1){
+		if (res == -1 || res == 1542){
 			if (F_DEBUG){
 				SendByte(1,'E');SendByte(1,'R');SendByte(1,'R');SendByte(1,'O');SendByte(1,'R');
 				SendByte(1,'A');SendByte(1,'D');SendByte(1,'C');SendByte(1,'0');
@@ -25,7 +25,7 @@ float ADC0(){   //TODO
 	}
 	if (res == -1)
 		return -1;
-	res -= 2045;//1857;//1820;	//смещение ноля
+	res -= 2006;//1857;//1820;	//смещение ноля 2045
 	res = res * 0.00522;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
  	return res;
 	//  a:byte;

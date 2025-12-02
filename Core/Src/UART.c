@@ -36,7 +36,7 @@ void sendDebug(const char *fmt, ...)
 /*Передача байта*/
  void SendByte(unsigned char uartNumber, uint8_t sendByte){/*sendByte- передаваемый байт, uartNumber - номер uart (1 или 2)*/
    if (uartNumber <= 1){		 
-		 HAL_UART_Transmit(&huart1,&sendByte,1,1000);
+		 HAL_UART_Transmit(&huart6,&sendByte,1,1000);
    }
    else{ //uartNumber != 1
 		 HAL_UART_Transmit(&huart6/*NB!!!*/,&sendByte,1,1000);

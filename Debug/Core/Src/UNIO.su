@@ -6,5 +6,5 @@
 ../Core/Src/UNIO.c:111:8:getUNIO	24	static
 ../Core/Src/UNIO.c:262:10:getADC_SPI	32	static
 ../Core/Src/UNIO.c:293:8:getDigitalInSPI	32	static
-../Core/Src/UNIO.c:343:10:getDigitalInWordSPI	40	static
-../Core/Src/UNIO.c:373:8:setDigitalOutSPI	32	static
+../Core/Src/UNIO.c:345:10:getDigitalInWordSPI	40	static
+../Core/Src/UNIO.c:391:8:setDigitalOutSPI	32	static

@@ -499,7 +499,39 @@ L1:   ZnTekI[300] =  PrSab;
      
    // port[AdAK] = 0x20 + a;
     switch (i){
-			case 1: 
+    		case 1: setUNIO(24, 1); break; // 1000
+    		case 2: setUNIO(24, 0); setUNIO(25, 1); break; //0100
+    		case 3: setUNIO(24, 1); break; // 1100
+    		case 4: setUNIO(26, 1); setUNIO(24, 0); setUNIO(25, 0); break; //0010
+    		case 5: setUNIO(24, 1); break; //1010
+    		case 6: setUNIO(25, 1); setUNIO(24, 0); break; //0110
+    		case 7: setUNIO(24, 1); break; //1110
+    		case 8: setUNIO(27, 1); setUNIO(26, 0);setUNIO(25, 0);setUNIO(24, 0);break; // 0001
+    		case 9: setUNIO(24, 1); break; //1001
+    		case 10: setUNIO(25, 1); setUNIO(24, 0); break; // 0101
+    		case 11: setUNIO(24, 1); break; //1101
+    		case 12: setUNIO(26, 1); setUNIO(25, 0); setUNIO(24, 0); break;//0011
+    		case 13: setUNIO(24, 1); break; //1011
+    		case 14: setUNIO(24, 0); setUNIO(25, 1); break; //0111
+    		case 15: setUNIO(24, 1); break; //1111
+    		case 16: setUNIO(27,0);setUNIO(26,0);setUNIO(25,0);setUNIO(24,0); setUNIO(29,0);setUNIO(28,1); break;
+    		case 17: setUNIO(24, 1); break; // 1000
+    		case 18: setUNIO(24, 0); setUNIO(25, 1); break; //0100
+    		case 19: setUNIO(24, 1); break; // 1100
+    		case 20: setUNIO(26, 1); setUNIO(24, 0); setUNIO(25, 0); break; //0010
+    		case 21: setUNIO(24, 1); break; //1010
+    		case 22: setUNIO(25, 1); setUNIO(24, 0); break; //0110
+    		case 23: setUNIO(24, 1); break; //1110
+    		case 24: setUNIO(27, 1); setUNIO(26, 0);setUNIO(25, 0);setUNIO(24, 0);break; // 0001
+    		case 25: setUNIO(24, 1); break; //1001
+    		case 26: setUNIO(25, 1); setUNIO(24, 0); break; // 0101
+    		case 27: setUNIO(24, 1); break; //1101
+    		case 28: setUNIO(26, 1); setUNIO(25, 0); setUNIO(24, 0); break;//0011
+    		case 29: setUNIO(24, 1); break; //1011
+    		case 30: setUNIO(24, 0); setUNIO(25, 1); break; //0111
+    		case 31: setUNIO(24, 1); break; //1111
+
+			/*case 1:
 			case 3: 
 			case 5: 
 			case 7: 
@@ -529,7 +561,7 @@ L1:   ZnTekI[300] =  PrSab;
 			case 28: setUNIO(27,0);setUNIO(26,0);setUNIO(25,1); break;
 			case 8:
 			case 24: setUNIO(27,0);setUNIO(26,0);setUNIO(25,0);setUNIO(24,1); break;
-			case 16: setUNIO(27,0);setUNIO(26,0);setUNIO(25,0);setUNIO(24,0); setUNIO(29,0);setUNIO(28,1); break;
+			case 16: setUNIO(27,0);setUNIO(26,0);setUNIO(25,0);setUNIO(24,0); setUNIO(29,0);setUNIO(28,1); break;*/
     }
     delay_ms(80);
 		i++;//дальше работаем со счетчиком в формате Pascal (от 1цы)
@@ -544,6 +576,7 @@ L1:   ZnTekI[300] =  PrSab;
     j = 1;
     do{
         izmZn = ADC0();
+        HAL_Delay(100);
         ZnUU[j] = fabs(izmZn);
         j++;
     //}while(j < 6);
@@ -939,7 +972,7 @@ L1:   ZnTekI[300] =  PrSab;
   float r;
 //  port[AdAK+3] =$00;/*установка разъема J8 (каналы 0...23) CPU188R на "передачу" для A,B,C1,С2*/
 //  port[AdAK]=$3D;/*адрес съема напряжения ДТЭ*/
-	setUNIO(27,1);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);     
+	setUNIO(27,1);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(31,0);setUNIO(30,1);
   delay_ms(50);
   r = ADC0();
 	//r = 5.0; //TODO!!! отладка с неработающим АК1
@@ -1185,6 +1218,7 @@ uint16_t a;
 	//a = 1; //TODO debug //
 	//TODO сделать обработку ошибок -1
   if (a == 0) PrPC = 0x30; else PrPC = 0x31;
+  //исправить на ==
 
   ZnTekI[399] = PrPC;
 

@@ -124,13 +124,14 @@ struct tLCTableFile FileLCTable;
 volatile uint8_t rx_ring[256];
 volatile uint16_t wr = 0;
 
-uint8_t Rx = 0;
+uint8_t Rx = 0x01;
 uint8_t tmpVal;
 uint16_t resVal = 0;
 uint8_t cmd[2] = {0xF0, 0};
 uint8_t num = 0;
 
-
+uint8_t tx = 0xAA;
+uint8_t rx = 0;
 
 
 void send_tekinf_ok_example(void)
@@ -303,6 +304,9 @@ int main(void)
   	setDigitalOutSPI(26,0);
   setUNIO(29,1);
   setUNIO(27,1);
+
+
+
 //прочитать память (была уже готовая функция)
 
 
@@ -372,6 +376,7 @@ int main(void)
 
 
 
+
 	  //HAL_StatusTypeDef st = HAL_UART_Receive(&huart6, &b, 1, 10);
 
 	  /*if (st == HAL_OK) {
@@ -414,10 +419,28 @@ int main(void)
 	  //getADC_SPI(0);
 
 	  	//HAL_GPIO_WritePin(FSS_MK_GPIO_Port,FSS_MK_Pin,GPIO_PIN_RESET);
+	    /*const char msg[] = "H\r\n";
+	    HAL_UART_Transmit(&huart6, (uint8_t*)msg, sizeof(msg) - 1, HAL_MAX_DELAY);
+	    HAL_Delay(500);*/
 
 
 
 
+	    /*uint8_t n;
+	    HAL_StatusTypeDef st = HAL_UART_Receive(&huart6, &n, 1, HAL_MAX_DELAY);
+	    HAL_UART_Receive(&huart6, &n, 1, HAL_MAX_DELAY);
+	    if (st == HAL_OK) {
+	    	HAL_UART_Transmit(&huart6, &n, 1, HAL_MAX_DELAY);
+	    	st = HAL_TIMEOUT;
+	    }*/
+
+/*
+	  HAL_StatusTypeDef st = HAL_UART_Receive(&huart6, &Rx, 1, HAL_MAX_DELAY);
+
+	  if (st == HAL_OK) {
+	    	 HAL_UART_Transmit(&huart6, &Rx, 1, 1000);
+	  }
+*/
 
 	  mainProgram();
 	  //PC();
@@ -469,7 +492,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 84;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -479,12 +507,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -576,7 +604,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
