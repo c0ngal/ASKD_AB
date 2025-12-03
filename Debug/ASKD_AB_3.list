@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00012224  2**0
                   CONTENTS, READONLY
- 13 .debug_info   000112ac  00000000  00000000  00012254  2**0
+ 13 .debug_info   0001129a  00000000  00000000  00012254  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00002f23  00000000  00000000  00023500  2**0
+ 14 .debug_abbrev 00002f23  00000000  00000000  000234ee  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000e60  00000000  00000000  00026428  2**3
+ 15 .debug_aranges 00000e60  00000000  00000000  00026418  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000b56  00000000  00000000  00027288  2**0
+ 16 .debug_rnglists 00000b56  00000000  00000000  00027278  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00023842  00000000  00000000  00027dde  2**0
+ 17 .debug_macro  00023842  00000000  00000000  00027dce  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00013e4f  00000000  00000000  0004b620  2**0
+ 18 .debug_line   00013e4c  00000000  00000000  0004b610  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000cdc1c  00000000  00000000  0005f46f  2**0
+ 19 .debug_str    000cdc1c  00000000  00000000  0005f45c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012d08b  2**0
+ 20 .comment      00000043  00000000  00000000  0012d078  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00004e3c  00000000  00000000  0012d0d0  2**2
+ 21 .debug_frame  00004e3c  00000000  00000000  0012d0bc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000058  00000000  00000000  00131f0c  2**0
+ 22 .debug_line_str 00000058  00000000  00000000  00131ef8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5548,650 +5548,650 @@ L1:   ZnTekI[300] =  PrSab;
         izmZn = ADC0();
  8002f86:	f7fe f84b 	bl	8001020 <ADC0>
  8002f8a:	eef0 7a40 	vmov.f32	s15, s0
- 8002f8e:	4b3c      	ldr	r3, [pc, #240]	@ (8003080 <izmU+0x408>)
+ 8002f8e:	4b3b      	ldr	r3, [pc, #236]	@ (800307c <izmU+0x404>)
  8002f90:	edc3 7a00 	vstr	s15, [r3]
-        HAL_Delay(100);
- 8002f94:	2064      	movs	r0, #100	@ 0x64
- 8002f96:	f006 f80d 	bl	8008fb4 <HAL_Delay>
+        //HAL_Delay(100);
         ZnUU[j] = fabs(izmZn);
- 8002f9a:	4b39      	ldr	r3, [pc, #228]	@ (8003080 <izmU+0x408>)
- 8002f9c:	edd3 7a00 	vldr	s15, [r3]
- 8002fa0:	88fb      	ldrh	r3, [r7, #6]
- 8002fa2:	eef0 7ae7 	vabs.f32	s15, s15
- 8002fa6:	4a37      	ldr	r2, [pc, #220]	@ (8003084 <izmU+0x40c>)
- 8002fa8:	009b      	lsls	r3, r3, #2
- 8002faa:	4413      	add	r3, r2
- 8002fac:	edc3 7a00 	vstr	s15, [r3]
+ 8002f94:	4b39      	ldr	r3, [pc, #228]	@ (800307c <izmU+0x404>)
+ 8002f96:	edd3 7a00 	vldr	s15, [r3]
+ 8002f9a:	88fb      	ldrh	r3, [r7, #6]
+ 8002f9c:	eef0 7ae7 	vabs.f32	s15, s15
+ 8002fa0:	4a37      	ldr	r2, [pc, #220]	@ (8003080 <izmU+0x408>)
+ 8002fa2:	009b      	lsls	r3, r3, #2
+ 8002fa4:	4413      	add	r3, r2
+ 8002fa6:	edc3 7a00 	vstr	s15, [r3]
         j++;
- 8002fb0:	88fb      	ldrh	r3, [r7, #6]
- 8002fb2:	3301      	adds	r3, #1
- 8002fb4:	80fb      	strh	r3, [r7, #6]
+ 8002faa:	88fb      	ldrh	r3, [r7, #6]
+ 8002fac:	3301      	adds	r3, #1
+ 8002fae:	80fb      	strh	r3, [r7, #6]
     //}while(j < 6);
     //}while(j < 21);
     }while(j < 8);
- 8002fb6:	88fb      	ldrh	r3, [r7, #6]
- 8002fb8:	2b07      	cmp	r3, #7
- 8002fba:	d9e4      	bls.n	8002f86 <izmU+0x30e>
+ 8002fb0:	88fb      	ldrh	r3, [r7, #6]
+ 8002fb2:	2b07      	cmp	r3, #7
+ 8002fb4:	d9e7      	bls.n	8002f86 <izmU+0x30e>
 
     x = 0;
- 8002fbc:	4b32      	ldr	r3, [pc, #200]	@ (8003088 <izmU+0x410>)
- 8002fbe:	f04f 0200 	mov.w	r2, #0
- 8002fc2:	601a      	str	r2, [r3, #0]
+ 8002fb6:	4b33      	ldr	r3, [pc, #204]	@ (8003084 <izmU+0x40c>)
+ 8002fb8:	f04f 0200 	mov.w	r2, #0
+ 8002fbc:	601a      	str	r2, [r3, #0]
     j = 1;
- 8002fc4:	2301      	movs	r3, #1
- 8002fc6:	80fb      	strh	r3, [r7, #6]
+ 8002fbe:	2301      	movs	r3, #1
+ 8002fc0:	80fb      	strh	r3, [r7, #6]
     do{
         x = x + ZnUU[j];
- 8002fc8:	88fb      	ldrh	r3, [r7, #6]
- 8002fca:	4a2e      	ldr	r2, [pc, #184]	@ (8003084 <izmU+0x40c>)
- 8002fcc:	009b      	lsls	r3, r3, #2
- 8002fce:	4413      	add	r3, r2
- 8002fd0:	ed93 7a00 	vldr	s14, [r3]
- 8002fd4:	4b2c      	ldr	r3, [pc, #176]	@ (8003088 <izmU+0x410>)
- 8002fd6:	edd3 7a00 	vldr	s15, [r3]
- 8002fda:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8002fde:	4b2a      	ldr	r3, [pc, #168]	@ (8003088 <izmU+0x410>)
- 8002fe0:	edc3 7a00 	vstr	s15, [r3]
+ 8002fc2:	88fb      	ldrh	r3, [r7, #6]
+ 8002fc4:	4a2e      	ldr	r2, [pc, #184]	@ (8003080 <izmU+0x408>)
+ 8002fc6:	009b      	lsls	r3, r3, #2
+ 8002fc8:	4413      	add	r3, r2
+ 8002fca:	ed93 7a00 	vldr	s14, [r3]
+ 8002fce:	4b2d      	ldr	r3, [pc, #180]	@ (8003084 <izmU+0x40c>)
+ 8002fd0:	edd3 7a00 	vldr	s15, [r3]
+ 8002fd4:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8002fd8:	4b2a      	ldr	r3, [pc, #168]	@ (8003084 <izmU+0x40c>)
+ 8002fda:	edc3 7a00 	vstr	s15, [r3]
         j++;
- 8002fe4:	88fb      	ldrh	r3, [r7, #6]
- 8002fe6:	3301      	adds	r3, #1
- 8002fe8:	80fb      	strh	r3, [r7, #6]
+ 8002fde:	88fb      	ldrh	r3, [r7, #6]
+ 8002fe0:	3301      	adds	r3, #1
+ 8002fe2:	80fb      	strh	r3, [r7, #6]
 //    }while(j < 6);
 //    }while(j < 21);
     }while(j < 8);
- 8002fea:	88fb      	ldrh	r3, [r7, #6]
- 8002fec:	2b07      	cmp	r3, #7
- 8002fee:	d9eb      	bls.n	8002fc8 <izmU+0x350>
+ 8002fe4:	88fb      	ldrh	r3, [r7, #6]
+ 8002fe6:	2b07      	cmp	r3, #7
+ 8002fe8:	d9eb      	bls.n	8002fc2 <izmU+0x34a>
     //izmZn = x/5.;
     //izmZn = x/20.;
     izmZn = x/7.;
- 8002ff0:	4b25      	ldr	r3, [pc, #148]	@ (8003088 <izmU+0x410>)
- 8002ff2:	ed93 7a00 	vldr	s14, [r3]
- 8002ff6:	eef1 6a0c 	vmov.f32	s13, #28	@ 0x40e00000  7.0
- 8002ffa:	eec7 7a26 	vdiv.f32	s15, s14, s13
- 8002ffe:	4b20      	ldr	r3, [pc, #128]	@ (8003080 <izmU+0x408>)
- 8003000:	edc3 7a00 	vstr	s15, [r3]
+ 8002fea:	4b26      	ldr	r3, [pc, #152]	@ (8003084 <izmU+0x40c>)
+ 8002fec:	ed93 7a00 	vldr	s14, [r3]
+ 8002ff0:	eef1 6a0c 	vmov.f32	s13, #28	@ 0x40e00000  7.0
+ 8002ff4:	eec7 7a26 	vdiv.f32	s15, s14, s13
+ 8002ff8:	4b20      	ldr	r3, [pc, #128]	@ (800307c <izmU+0x404>)
+ 8002ffa:	edc3 7a00 	vstr	s15, [r3]
 
     if (i>=1 && i < 8)
+ 8002ffe:	88bb      	ldrh	r3, [r7, #4]
+ 8003000:	2b00      	cmp	r3, #0
+ 8003002:	d00d      	beq.n	8003020 <izmU+0x3a8>
  8003004:	88bb      	ldrh	r3, [r7, #4]
- 8003006:	2b00      	cmp	r3, #0
- 8003008:	d00d      	beq.n	8003026 <izmU+0x3ae>
- 800300a:	88bb      	ldrh	r3, [r7, #4]
- 800300c:	2b07      	cmp	r3, #7
- 800300e:	d80a      	bhi.n	8003026 <izmU+0x3ae>
+ 8003006:	2b07      	cmp	r3, #7
+ 8003008:	d80a      	bhi.n	8003020 <izmU+0x3a8>
 			izmZn = izmZn * 4.00;//7.;//4.02;//4.01	//TODO!!! другой мультиплексер
- 8003010:	4b1b      	ldr	r3, [pc, #108]	@ (8003080 <izmU+0x408>)
- 8003012:	edd3 7a00 	vldr	s15, [r3]
- 8003016:	eeb1 7a00 	vmov.f32	s14, #16	@ 0x40800000  4.0
- 800301a:	ee67 7a87 	vmul.f32	s15, s15, s14
- 800301e:	4b18      	ldr	r3, [pc, #96]	@ (8003080 <izmU+0x408>)
- 8003020:	edc3 7a00 	vstr	s15, [r3]
- 8003024:	e018      	b.n	8003058 <izmU+0x3e0>
+ 800300a:	4b1c      	ldr	r3, [pc, #112]	@ (800307c <izmU+0x404>)
+ 800300c:	edd3 7a00 	vldr	s15, [r3]
+ 8003010:	eeb1 7a00 	vmov.f32	s14, #16	@ 0x40800000  4.0
+ 8003014:	ee67 7a87 	vmul.f32	s15, s15, s14
+ 8003018:	4b18      	ldr	r3, [pc, #96]	@ (800307c <izmU+0x404>)
+ 800301a:	edc3 7a00 	vstr	s15, [r3]
+ 800301e:	e018      	b.n	8003052 <izmU+0x3da>
     else if (i < 14)
- 8003026:	88bb      	ldrh	r3, [r7, #4]
- 8003028:	2b0d      	cmp	r3, #13
- 800302a:	d80a      	bhi.n	8003042 <izmU+0x3ca>
+ 8003020:	88bb      	ldrh	r3, [r7, #4]
+ 8003022:	2b0d      	cmp	r3, #13
+ 8003024:	d80a      	bhi.n	800303c <izmU+0x3c4>
         izmZn =  izmZn * 3.00;//5.;//3.01;//3.00	//TODO!!! другой мультиплексер
- 800302c:	4b14      	ldr	r3, [pc, #80]	@ (8003080 <izmU+0x408>)
- 800302e:	edd3 7a00 	vldr	s15, [r3]
- 8003032:	eeb0 7a08 	vmov.f32	s14, #8	@ 0x40400000  3.0
- 8003036:	ee67 7a87 	vmul.f32	s15, s15, s14
- 800303a:	4b11      	ldr	r3, [pc, #68]	@ (8003080 <izmU+0x408>)
- 800303c:	edc3 7a00 	vstr	s15, [r3]
- 8003040:	e00a      	b.n	8003058 <izmU+0x3e0>
+ 8003026:	4b15      	ldr	r3, [pc, #84]	@ (800307c <izmU+0x404>)
+ 8003028:	edd3 7a00 	vldr	s15, [r3]
+ 800302c:	eeb0 7a08 	vmov.f32	s14, #8	@ 0x40400000  3.0
+ 8003030:	ee67 7a87 	vmul.f32	s15, s15, s14
+ 8003034:	4b11      	ldr	r3, [pc, #68]	@ (800307c <izmU+0x404>)
+ 8003036:	edc3 7a00 	vstr	s15, [r3]
+ 800303a:	e00a      	b.n	8003052 <izmU+0x3da>
     else if (i < 20)
- 8003042:	88bb      	ldrh	r3, [r7, #4]
- 8003044:	2b13      	cmp	r3, #19
- 8003046:	d807      	bhi.n	8003058 <izmU+0x3e0>
+ 800303c:	88bb      	ldrh	r3, [r7, #4]
+ 800303e:	2b13      	cmp	r3, #19
+ 8003040:	d807      	bhi.n	8003052 <izmU+0x3da>
         izmZn = izmZn * 2.00;//3.;//2.00;//2.00	//TODO!!! другой мультиплексер
- 8003048:	4b0d      	ldr	r3, [pc, #52]	@ (8003080 <izmU+0x408>)
- 800304a:	edd3 7a00 	vldr	s15, [r3]
- 800304e:	ee77 7aa7 	vadd.f32	s15, s15, s15
- 8003052:	4b0b      	ldr	r3, [pc, #44]	@ (8003080 <izmU+0x408>)
- 8003054:	edc3 7a00 	vstr	s15, [r3]
+ 8003042:	4b0e      	ldr	r3, [pc, #56]	@ (800307c <izmU+0x404>)
+ 8003044:	edd3 7a00 	vldr	s15, [r3]
+ 8003048:	ee77 7aa7 	vadd.f32	s15, s15, s15
+ 800304c:	4b0b      	ldr	r3, [pc, #44]	@ (800307c <izmU+0x404>)
+ 800304e:	edc3 7a00 	vstr	s15, [r3]
 
     ZnU[i] = fabs(izmZn);
- 8003058:	4b09      	ldr	r3, [pc, #36]	@ (8003080 <izmU+0x408>)
- 800305a:	edd3 7a00 	vldr	s15, [r3]
- 800305e:	88bb      	ldrh	r3, [r7, #4]
- 8003060:	eef0 7ae7 	vabs.f32	s15, s15
- 8003064:	4a09      	ldr	r2, [pc, #36]	@ (800308c <izmU+0x414>)
- 8003066:	009b      	lsls	r3, r3, #2
- 8003068:	4413      	add	r3, r2
- 800306a:	edc3 7a00 	vstr	s15, [r3]
+ 8003052:	4b0a      	ldr	r3, [pc, #40]	@ (800307c <izmU+0x404>)
+ 8003054:	edd3 7a00 	vldr	s15, [r3]
+ 8003058:	88bb      	ldrh	r3, [r7, #4]
+ 800305a:	eef0 7ae7 	vabs.f32	s15, s15
+ 800305e:	4a0a      	ldr	r2, [pc, #40]	@ (8003088 <izmU+0x410>)
+ 8003060:	009b      	lsls	r3, r3, #2
+ 8003062:	4413      	add	r3, r2
+ 8003064:	edc3 7a00 	vstr	s15, [r3]
 //    a = a + 0x01;
     //i++; //уже прибавили раньше
  }while(i < 29);
- 800306e:	88bb      	ldrh	r3, [r7, #4]
- 8003070:	2b1c      	cmp	r3, #28
- 8003072:	f67f ae31 	bls.w	8002cd8 <izmU+0x60>
+ 8003068:	88bb      	ldrh	r3, [r7, #4]
+ 800306a:	2b1c      	cmp	r3, #28
+ 800306c:	f67f ae34 	bls.w	8002cd8 <izmU+0x60>
    ZnU[24] = 2.05;
    ZnU[25] = 1.00;
    ZnU[26] = 1.00;
    ZnU[27] = 5.00;
    ZnU[28] = 0.60;*/
  }
- 8003076:	bf00      	nop
- 8003078:	bf00      	nop
- 800307a:	3708      	adds	r7, #8
- 800307c:	46bd      	mov	sp, r7
- 800307e:	bd80      	pop	{r7, pc}
- 8003080:	200009a8 	.word	0x200009a8
- 8003084:	20000928 	.word	0x20000928
- 8003088:	20000804 	.word	0x20000804
- 800308c:	20000820 	.word	0x20000820
+ 8003070:	bf00      	nop
+ 8003072:	bf00      	nop
+ 8003074:	3708      	adds	r7, #8
+ 8003076:	46bd      	mov	sp, r7
+ 8003078:	bd80      	pop	{r7, pc}
+ 800307a:	bf00      	nop
+ 800307c:	200009a8 	.word	0x200009a8
+ 8003080:	20000928 	.word	0x20000928
+ 8003084:	20000804 	.word	0x20000804
+ 8003088:	20000820 	.word	0x20000820
 
-08003090 <Uakb>:
+0800308c <Uakb>:
 /*==============================================*/
 /*Вычисление истинных значений напряжений Ак[i] + полное Uab*/
  void Uakb(){
- 8003090:	b580      	push	{r7, lr}
- 8003092:	b082      	sub	sp, #8
- 8003094:	af00      	add	r7, sp, #0
+ 800308c:	b580      	push	{r7, lr}
+ 800308e:	b082      	sub	sp, #8
+ 8003090:	af00      	add	r7, sp, #0
 	 //Без мультиплексера
 	  uint16_t j,i = 2;
- 8003096:	2302      	movs	r3, #2
- 8003098:	80fb      	strh	r3, [r7, #6]
+ 8003092:	2302      	movs	r3, #2
+ 8003094:	80fb      	strh	r3, [r7, #6]
     float d;
 	 
     //uint16_t i = 2;
     do{
         ZnUakb[i]= ZnU[i] - ZnU[i+1];// + 0.01;
- 800309a:	88fb      	ldrh	r3, [r7, #6]
- 800309c:	4aaa      	ldr	r2, [pc, #680]	@ (8003348 <Uakb+0x2b8>)
- 800309e:	009b      	lsls	r3, r3, #2
- 80030a0:	4413      	add	r3, r2
- 80030a2:	ed93 7a00 	vldr	s14, [r3]
- 80030a6:	88fb      	ldrh	r3, [r7, #6]
- 80030a8:	3301      	adds	r3, #1
- 80030aa:	4aa7      	ldr	r2, [pc, #668]	@ (8003348 <Uakb+0x2b8>)
- 80030ac:	009b      	lsls	r3, r3, #2
- 80030ae:	4413      	add	r3, r2
- 80030b0:	edd3 7a00 	vldr	s15, [r3]
- 80030b4:	88fb      	ldrh	r3, [r7, #6]
- 80030b6:	ee77 7a67 	vsub.f32	s15, s14, s15
- 80030ba:	4aa4      	ldr	r2, [pc, #656]	@ (800334c <Uakb+0x2bc>)
- 80030bc:	009b      	lsls	r3, r3, #2
- 80030be:	4413      	add	r3, r2
- 80030c0:	edc3 7a00 	vstr	s15, [r3]
+ 8003096:	88fb      	ldrh	r3, [r7, #6]
+ 8003098:	4aaa      	ldr	r2, [pc, #680]	@ (8003344 <Uakb+0x2b8>)
+ 800309a:	009b      	lsls	r3, r3, #2
+ 800309c:	4413      	add	r3, r2
+ 800309e:	ed93 7a00 	vldr	s14, [r3]
+ 80030a2:	88fb      	ldrh	r3, [r7, #6]
+ 80030a4:	3301      	adds	r3, #1
+ 80030a6:	4aa7      	ldr	r2, [pc, #668]	@ (8003344 <Uakb+0x2b8>)
+ 80030a8:	009b      	lsls	r3, r3, #2
+ 80030aa:	4413      	add	r3, r2
+ 80030ac:	edd3 7a00 	vldr	s15, [r3]
+ 80030b0:	88fb      	ldrh	r3, [r7, #6]
+ 80030b2:	ee77 7a67 	vsub.f32	s15, s14, s15
+ 80030b6:	4aa4      	ldr	r2, [pc, #656]	@ (8003348 <Uakb+0x2bc>)
+ 80030b8:	009b      	lsls	r3, r3, #2
+ 80030ba:	4413      	add	r3, r2
+ 80030bc:	edc3 7a00 	vstr	s15, [r3]
         i++;
- 80030c4:	88fb      	ldrh	r3, [r7, #6]
- 80030c6:	3301      	adds	r3, #1
- 80030c8:	80fb      	strh	r3, [r7, #6]
+ 80030c0:	88fb      	ldrh	r3, [r7, #6]
+ 80030c2:	3301      	adds	r3, #1
+ 80030c4:	80fb      	strh	r3, [r7, #6]
     }while(i < 25);
- 80030ca:	88fb      	ldrh	r3, [r7, #6]
- 80030cc:	2b18      	cmp	r3, #24
- 80030ce:	d9e4      	bls.n	800309a <Uakb+0xa>
+ 80030c6:	88fb      	ldrh	r3, [r7, #6]
+ 80030c8:	2b18      	cmp	r3, #24
+ 80030ca:	d9e4      	bls.n	8003096 <Uakb+0xa>
 //    ZnUakb[17] = ZnUakb[17] - 0.00;/*АК № 16*/
 //    ZnUakb[18] = ZnUakb[18] - 0.00;/*АК № 17*/
 //    ZnUakb[19] = ZnUakb[19] - 0.00;/*АК № 18*/
 
 //    ZnUakb[25] = ZnU[25] + 0.00; /*U ak #24*/*/
 		ZnUakb[2] = ZnUakb[2] + kUr[1];/*АК № 1*/
- 80030d0:	4b9e      	ldr	r3, [pc, #632]	@ (800334c <Uakb+0x2bc>)
- 80030d2:	ed93 7a02 	vldr	s14, [r3, #8]
- 80030d6:	4b9e      	ldr	r3, [pc, #632]	@ (8003350 <Uakb+0x2c0>)
- 80030d8:	edd3 7a01 	vldr	s15, [r3, #4]
- 80030dc:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80030e0:	4b9a      	ldr	r3, [pc, #616]	@ (800334c <Uakb+0x2bc>)
- 80030e2:	edc3 7a02 	vstr	s15, [r3, #8]
+ 80030cc:	4b9e      	ldr	r3, [pc, #632]	@ (8003348 <Uakb+0x2bc>)
+ 80030ce:	ed93 7a02 	vldr	s14, [r3, #8]
+ 80030d2:	4b9e      	ldr	r3, [pc, #632]	@ (800334c <Uakb+0x2c0>)
+ 80030d4:	edd3 7a01 	vldr	s15, [r3, #4]
+ 80030d8:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80030dc:	4b9a      	ldr	r3, [pc, #616]	@ (8003348 <Uakb+0x2bc>)
+ 80030de:	edc3 7a02 	vstr	s15, [r3, #8]
     ZnUakb[3] = ZnUakb[3] + kUr[2];/*АК № 2*/
- 80030e6:	4b99      	ldr	r3, [pc, #612]	@ (800334c <Uakb+0x2bc>)
- 80030e8:	ed93 7a03 	vldr	s14, [r3, #12]
- 80030ec:	4b98      	ldr	r3, [pc, #608]	@ (8003350 <Uakb+0x2c0>)
- 80030ee:	edd3 7a02 	vldr	s15, [r3, #8]
- 80030f2:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80030f6:	4b95      	ldr	r3, [pc, #596]	@ (800334c <Uakb+0x2bc>)
- 80030f8:	edc3 7a03 	vstr	s15, [r3, #12]
+ 80030e2:	4b99      	ldr	r3, [pc, #612]	@ (8003348 <Uakb+0x2bc>)
+ 80030e4:	ed93 7a03 	vldr	s14, [r3, #12]
+ 80030e8:	4b98      	ldr	r3, [pc, #608]	@ (800334c <Uakb+0x2c0>)
+ 80030ea:	edd3 7a02 	vldr	s15, [r3, #8]
+ 80030ee:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80030f2:	4b95      	ldr	r3, [pc, #596]	@ (8003348 <Uakb+0x2bc>)
+ 80030f4:	edc3 7a03 	vstr	s15, [r3, #12]
     ZnUakb[4] = ZnUakb[4] + kUr[3];/*АК № 3*/
- 80030fc:	4b93      	ldr	r3, [pc, #588]	@ (800334c <Uakb+0x2bc>)
- 80030fe:	ed93 7a04 	vldr	s14, [r3, #16]
- 8003102:	4b93      	ldr	r3, [pc, #588]	@ (8003350 <Uakb+0x2c0>)
- 8003104:	edd3 7a03 	vldr	s15, [r3, #12]
- 8003108:	ee77 7a27 	vadd.f32	s15, s14, s15
- 800310c:	4b8f      	ldr	r3, [pc, #572]	@ (800334c <Uakb+0x2bc>)
- 800310e:	edc3 7a04 	vstr	s15, [r3, #16]
+ 80030f8:	4b93      	ldr	r3, [pc, #588]	@ (8003348 <Uakb+0x2bc>)
+ 80030fa:	ed93 7a04 	vldr	s14, [r3, #16]
+ 80030fe:	4b93      	ldr	r3, [pc, #588]	@ (800334c <Uakb+0x2c0>)
+ 8003100:	edd3 7a03 	vldr	s15, [r3, #12]
+ 8003104:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003108:	4b8f      	ldr	r3, [pc, #572]	@ (8003348 <Uakb+0x2bc>)
+ 800310a:	edc3 7a04 	vstr	s15, [r3, #16]
     ZnUakb[5] = ZnUakb[5] + kUr[4];/*АК № 4*/
- 8003112:	4b8e      	ldr	r3, [pc, #568]	@ (800334c <Uakb+0x2bc>)
- 8003114:	ed93 7a05 	vldr	s14, [r3, #20]
- 8003118:	4b8d      	ldr	r3, [pc, #564]	@ (8003350 <Uakb+0x2c0>)
- 800311a:	edd3 7a04 	vldr	s15, [r3, #16]
- 800311e:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003122:	4b8a      	ldr	r3, [pc, #552]	@ (800334c <Uakb+0x2bc>)
- 8003124:	edc3 7a05 	vstr	s15, [r3, #20]
+ 800310e:	4b8e      	ldr	r3, [pc, #568]	@ (8003348 <Uakb+0x2bc>)
+ 8003110:	ed93 7a05 	vldr	s14, [r3, #20]
+ 8003114:	4b8d      	ldr	r3, [pc, #564]	@ (800334c <Uakb+0x2c0>)
+ 8003116:	edd3 7a04 	vldr	s15, [r3, #16]
+ 800311a:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 800311e:	4b8a      	ldr	r3, [pc, #552]	@ (8003348 <Uakb+0x2bc>)
+ 8003120:	edc3 7a05 	vstr	s15, [r3, #20]
     ZnUakb[6] = ZnUakb[6] + kUr[5];/*АК № 5*/
- 8003128:	4b88      	ldr	r3, [pc, #544]	@ (800334c <Uakb+0x2bc>)
- 800312a:	ed93 7a06 	vldr	s14, [r3, #24]
- 800312e:	4b88      	ldr	r3, [pc, #544]	@ (8003350 <Uakb+0x2c0>)
- 8003130:	edd3 7a05 	vldr	s15, [r3, #20]
- 8003134:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003138:	4b84      	ldr	r3, [pc, #528]	@ (800334c <Uakb+0x2bc>)
- 800313a:	edc3 7a06 	vstr	s15, [r3, #24]
+ 8003124:	4b88      	ldr	r3, [pc, #544]	@ (8003348 <Uakb+0x2bc>)
+ 8003126:	ed93 7a06 	vldr	s14, [r3, #24]
+ 800312a:	4b88      	ldr	r3, [pc, #544]	@ (800334c <Uakb+0x2c0>)
+ 800312c:	edd3 7a05 	vldr	s15, [r3, #20]
+ 8003130:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003134:	4b84      	ldr	r3, [pc, #528]	@ (8003348 <Uakb+0x2bc>)
+ 8003136:	edc3 7a06 	vstr	s15, [r3, #24]
     ZnUakb[7] = ZnUakb[7] + kUr[6];/*АК № 6*/
- 800313e:	4b83      	ldr	r3, [pc, #524]	@ (800334c <Uakb+0x2bc>)
- 8003140:	ed93 7a07 	vldr	s14, [r3, #28]
- 8003144:	4b82      	ldr	r3, [pc, #520]	@ (8003350 <Uakb+0x2c0>)
- 8003146:	edd3 7a06 	vldr	s15, [r3, #24]
- 800314a:	ee77 7a27 	vadd.f32	s15, s14, s15
- 800314e:	4b7f      	ldr	r3, [pc, #508]	@ (800334c <Uakb+0x2bc>)
- 8003150:	edc3 7a07 	vstr	s15, [r3, #28]
+ 800313a:	4b83      	ldr	r3, [pc, #524]	@ (8003348 <Uakb+0x2bc>)
+ 800313c:	ed93 7a07 	vldr	s14, [r3, #28]
+ 8003140:	4b82      	ldr	r3, [pc, #520]	@ (800334c <Uakb+0x2c0>)
+ 8003142:	edd3 7a06 	vldr	s15, [r3, #24]
+ 8003146:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 800314a:	4b7f      	ldr	r3, [pc, #508]	@ (8003348 <Uakb+0x2bc>)
+ 800314c:	edc3 7a07 	vstr	s15, [r3, #28]
     ZnUakb[8] = ZnUakb[8] + kUr[7];/*АК № 7*/
- 8003154:	4b7d      	ldr	r3, [pc, #500]	@ (800334c <Uakb+0x2bc>)
- 8003156:	ed93 7a08 	vldr	s14, [r3, #32]
- 800315a:	4b7d      	ldr	r3, [pc, #500]	@ (8003350 <Uakb+0x2c0>)
- 800315c:	edd3 7a07 	vldr	s15, [r3, #28]
- 8003160:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003164:	4b79      	ldr	r3, [pc, #484]	@ (800334c <Uakb+0x2bc>)
- 8003166:	edc3 7a08 	vstr	s15, [r3, #32]
+ 8003150:	4b7d      	ldr	r3, [pc, #500]	@ (8003348 <Uakb+0x2bc>)
+ 8003152:	ed93 7a08 	vldr	s14, [r3, #32]
+ 8003156:	4b7d      	ldr	r3, [pc, #500]	@ (800334c <Uakb+0x2c0>)
+ 8003158:	edd3 7a07 	vldr	s15, [r3, #28]
+ 800315c:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003160:	4b79      	ldr	r3, [pc, #484]	@ (8003348 <Uakb+0x2bc>)
+ 8003162:	edc3 7a08 	vstr	s15, [r3, #32]
     ZnUakb[9] = ZnUakb[9] + kUr[8];/*АК № 8*/
- 800316a:	4b78      	ldr	r3, [pc, #480]	@ (800334c <Uakb+0x2bc>)
- 800316c:	ed93 7a09 	vldr	s14, [r3, #36]	@ 0x24
- 8003170:	4b77      	ldr	r3, [pc, #476]	@ (8003350 <Uakb+0x2c0>)
- 8003172:	edd3 7a08 	vldr	s15, [r3, #32]
- 8003176:	ee77 7a27 	vadd.f32	s15, s14, s15
- 800317a:	4b74      	ldr	r3, [pc, #464]	@ (800334c <Uakb+0x2bc>)
- 800317c:	edc3 7a09 	vstr	s15, [r3, #36]	@ 0x24
+ 8003166:	4b78      	ldr	r3, [pc, #480]	@ (8003348 <Uakb+0x2bc>)
+ 8003168:	ed93 7a09 	vldr	s14, [r3, #36]	@ 0x24
+ 800316c:	4b77      	ldr	r3, [pc, #476]	@ (800334c <Uakb+0x2c0>)
+ 800316e:	edd3 7a08 	vldr	s15, [r3, #32]
+ 8003172:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003176:	4b74      	ldr	r3, [pc, #464]	@ (8003348 <Uakb+0x2bc>)
+ 8003178:	edc3 7a09 	vstr	s15, [r3, #36]	@ 0x24
     ZnUakb[10] = ZnUakb[10] + kUr[9];/*АК № 9*/
- 8003180:	4b72      	ldr	r3, [pc, #456]	@ (800334c <Uakb+0x2bc>)
- 8003182:	ed93 7a0a 	vldr	s14, [r3, #40]	@ 0x28
- 8003186:	4b72      	ldr	r3, [pc, #456]	@ (8003350 <Uakb+0x2c0>)
- 8003188:	edd3 7a09 	vldr	s15, [r3, #36]	@ 0x24
- 800318c:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003190:	4b6e      	ldr	r3, [pc, #440]	@ (800334c <Uakb+0x2bc>)
- 8003192:	edc3 7a0a 	vstr	s15, [r3, #40]	@ 0x28
+ 800317c:	4b72      	ldr	r3, [pc, #456]	@ (8003348 <Uakb+0x2bc>)
+ 800317e:	ed93 7a0a 	vldr	s14, [r3, #40]	@ 0x28
+ 8003182:	4b72      	ldr	r3, [pc, #456]	@ (800334c <Uakb+0x2c0>)
+ 8003184:	edd3 7a09 	vldr	s15, [r3, #36]	@ 0x24
+ 8003188:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 800318c:	4b6e      	ldr	r3, [pc, #440]	@ (8003348 <Uakb+0x2bc>)
+ 800318e:	edc3 7a0a 	vstr	s15, [r3, #40]	@ 0x28
     ZnUakb[11] = ZnUakb[11] + kUr[10];/*АК № 10*/
- 8003196:	4b6d      	ldr	r3, [pc, #436]	@ (800334c <Uakb+0x2bc>)
- 8003198:	ed93 7a0b 	vldr	s14, [r3, #44]	@ 0x2c
- 800319c:	4b6c      	ldr	r3, [pc, #432]	@ (8003350 <Uakb+0x2c0>)
- 800319e:	edd3 7a0a 	vldr	s15, [r3, #40]	@ 0x28
- 80031a2:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80031a6:	4b69      	ldr	r3, [pc, #420]	@ (800334c <Uakb+0x2bc>)
- 80031a8:	edc3 7a0b 	vstr	s15, [r3, #44]	@ 0x2c
+ 8003192:	4b6d      	ldr	r3, [pc, #436]	@ (8003348 <Uakb+0x2bc>)
+ 8003194:	ed93 7a0b 	vldr	s14, [r3, #44]	@ 0x2c
+ 8003198:	4b6c      	ldr	r3, [pc, #432]	@ (800334c <Uakb+0x2c0>)
+ 800319a:	edd3 7a0a 	vldr	s15, [r3, #40]	@ 0x28
+ 800319e:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80031a2:	4b69      	ldr	r3, [pc, #420]	@ (8003348 <Uakb+0x2bc>)
+ 80031a4:	edc3 7a0b 	vstr	s15, [r3, #44]	@ 0x2c
     ZnUakb[12] = ZnUakb[12] + kUr[11];/*АК № 11*/
- 80031ac:	4b67      	ldr	r3, [pc, #412]	@ (800334c <Uakb+0x2bc>)
- 80031ae:	ed93 7a0c 	vldr	s14, [r3, #48]	@ 0x30
- 80031b2:	4b67      	ldr	r3, [pc, #412]	@ (8003350 <Uakb+0x2c0>)
- 80031b4:	edd3 7a0b 	vldr	s15, [r3, #44]	@ 0x2c
- 80031b8:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80031bc:	4b63      	ldr	r3, [pc, #396]	@ (800334c <Uakb+0x2bc>)
- 80031be:	edc3 7a0c 	vstr	s15, [r3, #48]	@ 0x30
+ 80031a8:	4b67      	ldr	r3, [pc, #412]	@ (8003348 <Uakb+0x2bc>)
+ 80031aa:	ed93 7a0c 	vldr	s14, [r3, #48]	@ 0x30
+ 80031ae:	4b67      	ldr	r3, [pc, #412]	@ (800334c <Uakb+0x2c0>)
+ 80031b0:	edd3 7a0b 	vldr	s15, [r3, #44]	@ 0x2c
+ 80031b4:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80031b8:	4b63      	ldr	r3, [pc, #396]	@ (8003348 <Uakb+0x2bc>)
+ 80031ba:	edc3 7a0c 	vstr	s15, [r3, #48]	@ 0x30
     ZnUakb[13] = ZnUakb[13] + kUr[12];/*АК № 12*/
- 80031c2:	4b62      	ldr	r3, [pc, #392]	@ (800334c <Uakb+0x2bc>)
- 80031c4:	ed93 7a0d 	vldr	s14, [r3, #52]	@ 0x34
- 80031c8:	4b61      	ldr	r3, [pc, #388]	@ (8003350 <Uakb+0x2c0>)
- 80031ca:	edd3 7a0c 	vldr	s15, [r3, #48]	@ 0x30
- 80031ce:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80031d2:	4b5e      	ldr	r3, [pc, #376]	@ (800334c <Uakb+0x2bc>)
- 80031d4:	edc3 7a0d 	vstr	s15, [r3, #52]	@ 0x34
+ 80031be:	4b62      	ldr	r3, [pc, #392]	@ (8003348 <Uakb+0x2bc>)
+ 80031c0:	ed93 7a0d 	vldr	s14, [r3, #52]	@ 0x34
+ 80031c4:	4b61      	ldr	r3, [pc, #388]	@ (800334c <Uakb+0x2c0>)
+ 80031c6:	edd3 7a0c 	vldr	s15, [r3, #48]	@ 0x30
+ 80031ca:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80031ce:	4b5e      	ldr	r3, [pc, #376]	@ (8003348 <Uakb+0x2bc>)
+ 80031d0:	edc3 7a0d 	vstr	s15, [r3, #52]	@ 0x34
     ZnUakb[14] = ZnUakb[14] + kUr[13];/*АК № 13*/
- 80031d8:	4b5c      	ldr	r3, [pc, #368]	@ (800334c <Uakb+0x2bc>)
- 80031da:	ed93 7a0e 	vldr	s14, [r3, #56]	@ 0x38
- 80031de:	4b5c      	ldr	r3, [pc, #368]	@ (8003350 <Uakb+0x2c0>)
- 80031e0:	edd3 7a0d 	vldr	s15, [r3, #52]	@ 0x34
- 80031e4:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80031e8:	4b58      	ldr	r3, [pc, #352]	@ (800334c <Uakb+0x2bc>)
- 80031ea:	edc3 7a0e 	vstr	s15, [r3, #56]	@ 0x38
+ 80031d4:	4b5c      	ldr	r3, [pc, #368]	@ (8003348 <Uakb+0x2bc>)
+ 80031d6:	ed93 7a0e 	vldr	s14, [r3, #56]	@ 0x38
+ 80031da:	4b5c      	ldr	r3, [pc, #368]	@ (800334c <Uakb+0x2c0>)
+ 80031dc:	edd3 7a0d 	vldr	s15, [r3, #52]	@ 0x34
+ 80031e0:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80031e4:	4b58      	ldr	r3, [pc, #352]	@ (8003348 <Uakb+0x2bc>)
+ 80031e6:	edc3 7a0e 	vstr	s15, [r3, #56]	@ 0x38
     ZnUakb[15] = ZnUakb[15] + kUr[14];/*АК № 14*/
- 80031ee:	4b57      	ldr	r3, [pc, #348]	@ (800334c <Uakb+0x2bc>)
- 80031f0:	ed93 7a0f 	vldr	s14, [r3, #60]	@ 0x3c
- 80031f4:	4b56      	ldr	r3, [pc, #344]	@ (8003350 <Uakb+0x2c0>)
- 80031f6:	edd3 7a0e 	vldr	s15, [r3, #56]	@ 0x38
- 80031fa:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80031fe:	4b53      	ldr	r3, [pc, #332]	@ (800334c <Uakb+0x2bc>)
- 8003200:	edc3 7a0f 	vstr	s15, [r3, #60]	@ 0x3c
+ 80031ea:	4b57      	ldr	r3, [pc, #348]	@ (8003348 <Uakb+0x2bc>)
+ 80031ec:	ed93 7a0f 	vldr	s14, [r3, #60]	@ 0x3c
+ 80031f0:	4b56      	ldr	r3, [pc, #344]	@ (800334c <Uakb+0x2c0>)
+ 80031f2:	edd3 7a0e 	vldr	s15, [r3, #56]	@ 0x38
+ 80031f6:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80031fa:	4b53      	ldr	r3, [pc, #332]	@ (8003348 <Uakb+0x2bc>)
+ 80031fc:	edc3 7a0f 	vstr	s15, [r3, #60]	@ 0x3c
     ZnUakb[16] = ZnUakb[16] + kUr[15];/*АК № 15*/
- 8003204:	4b51      	ldr	r3, [pc, #324]	@ (800334c <Uakb+0x2bc>)
- 8003206:	ed93 7a10 	vldr	s14, [r3, #64]	@ 0x40
- 800320a:	4b51      	ldr	r3, [pc, #324]	@ (8003350 <Uakb+0x2c0>)
- 800320c:	edd3 7a0f 	vldr	s15, [r3, #60]	@ 0x3c
- 8003210:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003214:	4b4d      	ldr	r3, [pc, #308]	@ (800334c <Uakb+0x2bc>)
- 8003216:	edc3 7a10 	vstr	s15, [r3, #64]	@ 0x40
+ 8003200:	4b51      	ldr	r3, [pc, #324]	@ (8003348 <Uakb+0x2bc>)
+ 8003202:	ed93 7a10 	vldr	s14, [r3, #64]	@ 0x40
+ 8003206:	4b51      	ldr	r3, [pc, #324]	@ (800334c <Uakb+0x2c0>)
+ 8003208:	edd3 7a0f 	vldr	s15, [r3, #60]	@ 0x3c
+ 800320c:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003210:	4b4d      	ldr	r3, [pc, #308]	@ (8003348 <Uakb+0x2bc>)
+ 8003212:	edc3 7a10 	vstr	s15, [r3, #64]	@ 0x40
     ZnUakb[17] = ZnUakb[17] + kUr[16];/*АК № 16*/
- 800321a:	4b4c      	ldr	r3, [pc, #304]	@ (800334c <Uakb+0x2bc>)
- 800321c:	ed93 7a11 	vldr	s14, [r3, #68]	@ 0x44
- 8003220:	4b4b      	ldr	r3, [pc, #300]	@ (8003350 <Uakb+0x2c0>)
- 8003222:	edd3 7a10 	vldr	s15, [r3, #64]	@ 0x40
- 8003226:	ee77 7a27 	vadd.f32	s15, s14, s15
- 800322a:	4b48      	ldr	r3, [pc, #288]	@ (800334c <Uakb+0x2bc>)
- 800322c:	edc3 7a11 	vstr	s15, [r3, #68]	@ 0x44
+ 8003216:	4b4c      	ldr	r3, [pc, #304]	@ (8003348 <Uakb+0x2bc>)
+ 8003218:	ed93 7a11 	vldr	s14, [r3, #68]	@ 0x44
+ 800321c:	4b4b      	ldr	r3, [pc, #300]	@ (800334c <Uakb+0x2c0>)
+ 800321e:	edd3 7a10 	vldr	s15, [r3, #64]	@ 0x40
+ 8003222:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003226:	4b48      	ldr	r3, [pc, #288]	@ (8003348 <Uakb+0x2bc>)
+ 8003228:	edc3 7a11 	vstr	s15, [r3, #68]	@ 0x44
     ZnUakb[18] = ZnUakb[18] + kUr[17];/*АК № 17*/
- 8003230:	4b46      	ldr	r3, [pc, #280]	@ (800334c <Uakb+0x2bc>)
- 8003232:	ed93 7a12 	vldr	s14, [r3, #72]	@ 0x48
- 8003236:	4b46      	ldr	r3, [pc, #280]	@ (8003350 <Uakb+0x2c0>)
- 8003238:	edd3 7a11 	vldr	s15, [r3, #68]	@ 0x44
- 800323c:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003240:	4b42      	ldr	r3, [pc, #264]	@ (800334c <Uakb+0x2bc>)
- 8003242:	edc3 7a12 	vstr	s15, [r3, #72]	@ 0x48
+ 800322c:	4b46      	ldr	r3, [pc, #280]	@ (8003348 <Uakb+0x2bc>)
+ 800322e:	ed93 7a12 	vldr	s14, [r3, #72]	@ 0x48
+ 8003232:	4b46      	ldr	r3, [pc, #280]	@ (800334c <Uakb+0x2c0>)
+ 8003234:	edd3 7a11 	vldr	s15, [r3, #68]	@ 0x44
+ 8003238:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 800323c:	4b42      	ldr	r3, [pc, #264]	@ (8003348 <Uakb+0x2bc>)
+ 800323e:	edc3 7a12 	vstr	s15, [r3, #72]	@ 0x48
     ZnUakb[19] = ZnUakb[19] + kUr[18];/*АК № 18*/
- 8003246:	4b41      	ldr	r3, [pc, #260]	@ (800334c <Uakb+0x2bc>)
- 8003248:	ed93 7a13 	vldr	s14, [r3, #76]	@ 0x4c
- 800324c:	4b40      	ldr	r3, [pc, #256]	@ (8003350 <Uakb+0x2c0>)
- 800324e:	edd3 7a12 	vldr	s15, [r3, #72]	@ 0x48
- 8003252:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003256:	4b3d      	ldr	r3, [pc, #244]	@ (800334c <Uakb+0x2bc>)
- 8003258:	edc3 7a13 	vstr	s15, [r3, #76]	@ 0x4c
+ 8003242:	4b41      	ldr	r3, [pc, #260]	@ (8003348 <Uakb+0x2bc>)
+ 8003244:	ed93 7a13 	vldr	s14, [r3, #76]	@ 0x4c
+ 8003248:	4b40      	ldr	r3, [pc, #256]	@ (800334c <Uakb+0x2c0>)
+ 800324a:	edd3 7a12 	vldr	s15, [r3, #72]	@ 0x48
+ 800324e:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003252:	4b3d      	ldr	r3, [pc, #244]	@ (8003348 <Uakb+0x2bc>)
+ 8003254:	edc3 7a13 	vstr	s15, [r3, #76]	@ 0x4c
     ZnUakb[20] = ZnUakb[20] + kUr[19];/*АК № 19*/
- 800325c:	4b3b      	ldr	r3, [pc, #236]	@ (800334c <Uakb+0x2bc>)
- 800325e:	ed93 7a14 	vldr	s14, [r3, #80]	@ 0x50
- 8003262:	4b3b      	ldr	r3, [pc, #236]	@ (8003350 <Uakb+0x2c0>)
- 8003264:	edd3 7a13 	vldr	s15, [r3, #76]	@ 0x4c
- 8003268:	ee77 7a27 	vadd.f32	s15, s14, s15
- 800326c:	4b37      	ldr	r3, [pc, #220]	@ (800334c <Uakb+0x2bc>)
- 800326e:	edc3 7a14 	vstr	s15, [r3, #80]	@ 0x50
+ 8003258:	4b3b      	ldr	r3, [pc, #236]	@ (8003348 <Uakb+0x2bc>)
+ 800325a:	ed93 7a14 	vldr	s14, [r3, #80]	@ 0x50
+ 800325e:	4b3b      	ldr	r3, [pc, #236]	@ (800334c <Uakb+0x2c0>)
+ 8003260:	edd3 7a13 	vldr	s15, [r3, #76]	@ 0x4c
+ 8003264:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003268:	4b37      	ldr	r3, [pc, #220]	@ (8003348 <Uakb+0x2bc>)
+ 800326a:	edc3 7a14 	vstr	s15, [r3, #80]	@ 0x50
     ZnUakb[21] = ZnUakb[21] + kUr[20];/*АК № 20*/
- 8003272:	4b36      	ldr	r3, [pc, #216]	@ (800334c <Uakb+0x2bc>)
- 8003274:	ed93 7a15 	vldr	s14, [r3, #84]	@ 0x54
- 8003278:	4b35      	ldr	r3, [pc, #212]	@ (8003350 <Uakb+0x2c0>)
- 800327a:	edd3 7a14 	vldr	s15, [r3, #80]	@ 0x50
- 800327e:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003282:	4b32      	ldr	r3, [pc, #200]	@ (800334c <Uakb+0x2bc>)
- 8003284:	edc3 7a15 	vstr	s15, [r3, #84]	@ 0x54
+ 800326e:	4b36      	ldr	r3, [pc, #216]	@ (8003348 <Uakb+0x2bc>)
+ 8003270:	ed93 7a15 	vldr	s14, [r3, #84]	@ 0x54
+ 8003274:	4b35      	ldr	r3, [pc, #212]	@ (800334c <Uakb+0x2c0>)
+ 8003276:	edd3 7a14 	vldr	s15, [r3, #80]	@ 0x50
+ 800327a:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 800327e:	4b32      	ldr	r3, [pc, #200]	@ (8003348 <Uakb+0x2bc>)
+ 8003280:	edc3 7a15 	vstr	s15, [r3, #84]	@ 0x54
     ZnUakb[22] = ZnUakb[22] + kUr[21];/*АК № 21*/
- 8003288:	4b30      	ldr	r3, [pc, #192]	@ (800334c <Uakb+0x2bc>)
- 800328a:	ed93 7a16 	vldr	s14, [r3, #88]	@ 0x58
- 800328e:	4b30      	ldr	r3, [pc, #192]	@ (8003350 <Uakb+0x2c0>)
- 8003290:	edd3 7a15 	vldr	s15, [r3, #84]	@ 0x54
- 8003294:	ee77 7a27 	vadd.f32	s15, s14, s15
- 8003298:	4b2c      	ldr	r3, [pc, #176]	@ (800334c <Uakb+0x2bc>)
- 800329a:	edc3 7a16 	vstr	s15, [r3, #88]	@ 0x58
+ 8003284:	4b30      	ldr	r3, [pc, #192]	@ (8003348 <Uakb+0x2bc>)
+ 8003286:	ed93 7a16 	vldr	s14, [r3, #88]	@ 0x58
+ 800328a:	4b30      	ldr	r3, [pc, #192]	@ (800334c <Uakb+0x2c0>)
+ 800328c:	edd3 7a15 	vldr	s15, [r3, #84]	@ 0x54
+ 8003290:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 8003294:	4b2c      	ldr	r3, [pc, #176]	@ (8003348 <Uakb+0x2bc>)
+ 8003296:	edc3 7a16 	vstr	s15, [r3, #88]	@ 0x58
     ZnUakb[23] = ZnUakb[23] + kUr[22];/*АК № 22*/
- 800329e:	4b2b      	ldr	r3, [pc, #172]	@ (800334c <Uakb+0x2bc>)
- 80032a0:	ed93 7a17 	vldr	s14, [r3, #92]	@ 0x5c
- 80032a4:	4b2a      	ldr	r3, [pc, #168]	@ (8003350 <Uakb+0x2c0>)
- 80032a6:	edd3 7a16 	vldr	s15, [r3, #88]	@ 0x58
- 80032aa:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80032ae:	4b27      	ldr	r3, [pc, #156]	@ (800334c <Uakb+0x2bc>)
- 80032b0:	edc3 7a17 	vstr	s15, [r3, #92]	@ 0x5c
+ 800329a:	4b2b      	ldr	r3, [pc, #172]	@ (8003348 <Uakb+0x2bc>)
+ 800329c:	ed93 7a17 	vldr	s14, [r3, #92]	@ 0x5c
+ 80032a0:	4b2a      	ldr	r3, [pc, #168]	@ (800334c <Uakb+0x2c0>)
+ 80032a2:	edd3 7a16 	vldr	s15, [r3, #88]	@ 0x58
+ 80032a6:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80032aa:	4b27      	ldr	r3, [pc, #156]	@ (8003348 <Uakb+0x2bc>)
+ 80032ac:	edc3 7a17 	vstr	s15, [r3, #92]	@ 0x5c
     ZnUakb[24] = ZnUakb[24] + kUr[23];/*АК № 23*/
- 80032b4:	4b25      	ldr	r3, [pc, #148]	@ (800334c <Uakb+0x2bc>)
- 80032b6:	ed93 7a18 	vldr	s14, [r3, #96]	@ 0x60
- 80032ba:	4b25      	ldr	r3, [pc, #148]	@ (8003350 <Uakb+0x2c0>)
- 80032bc:	edd3 7a17 	vldr	s15, [r3, #92]	@ 0x5c
- 80032c0:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80032c4:	4b21      	ldr	r3, [pc, #132]	@ (800334c <Uakb+0x2bc>)
- 80032c6:	edc3 7a18 	vstr	s15, [r3, #96]	@ 0x60
+ 80032b0:	4b25      	ldr	r3, [pc, #148]	@ (8003348 <Uakb+0x2bc>)
+ 80032b2:	ed93 7a18 	vldr	s14, [r3, #96]	@ 0x60
+ 80032b6:	4b25      	ldr	r3, [pc, #148]	@ (800334c <Uakb+0x2c0>)
+ 80032b8:	edd3 7a17 	vldr	s15, [r3, #92]	@ 0x5c
+ 80032bc:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80032c0:	4b21      	ldr	r3, [pc, #132]	@ (8003348 <Uakb+0x2bc>)
+ 80032c2:	edc3 7a18 	vstr	s15, [r3, #96]	@ 0x60
     ZnUakb[25] = ZnU[25] + kUr[24]; /*U ak № 24*/
- 80032ca:	4b1f      	ldr	r3, [pc, #124]	@ (8003348 <Uakb+0x2b8>)
- 80032cc:	ed93 7a19 	vldr	s14, [r3, #100]	@ 0x64
- 80032d0:	4b1f      	ldr	r3, [pc, #124]	@ (8003350 <Uakb+0x2c0>)
- 80032d2:	edd3 7a18 	vldr	s15, [r3, #96]	@ 0x60
- 80032d6:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80032da:	4b1c      	ldr	r3, [pc, #112]	@ (800334c <Uakb+0x2bc>)
- 80032dc:	edc3 7a19 	vstr	s15, [r3, #100]	@ 0x64
+ 80032c6:	4b1f      	ldr	r3, [pc, #124]	@ (8003344 <Uakb+0x2b8>)
+ 80032c8:	ed93 7a19 	vldr	s14, [r3, #100]	@ 0x64
+ 80032cc:	4b1f      	ldr	r3, [pc, #124]	@ (800334c <Uakb+0x2c0>)
+ 80032ce:	edd3 7a18 	vldr	s15, [r3, #96]	@ 0x60
+ 80032d2:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80032d6:	4b1c      	ldr	r3, [pc, #112]	@ (8003348 <Uakb+0x2bc>)
+ 80032d8:	edc3 7a19 	vstr	s15, [r3, #100]	@ 0x64
 
 //без мультиплексера
     //ZnUakb[1] = ZnU[1];/*U аб*/
 		i = 2;
- 80032e0:	2302      	movs	r3, #2
- 80032e2:	80fb      	strh	r3, [r7, #6]
+ 80032dc:	2302      	movs	r3, #2
+ 80032de:	80fb      	strh	r3, [r7, #6]
     d = 0;
- 80032e4:	f04f 0300 	mov.w	r3, #0
- 80032e8:	603b      	str	r3, [r7, #0]
+ 80032e0:	f04f 0300 	mov.w	r3, #0
+ 80032e4:	603b      	str	r3, [r7, #0]
     do{
 			d = d + ZnUakb[i];
- 80032ea:	88fb      	ldrh	r3, [r7, #6]
- 80032ec:	4a17      	ldr	r2, [pc, #92]	@ (800334c <Uakb+0x2bc>)
- 80032ee:	009b      	lsls	r3, r3, #2
- 80032f0:	4413      	add	r3, r2
- 80032f2:	edd3 7a00 	vldr	s15, [r3]
- 80032f6:	ed97 7a00 	vldr	s14, [r7]
- 80032fa:	ee77 7a27 	vadd.f32	s15, s14, s15
- 80032fe:	edc7 7a00 	vstr	s15, [r7]
+ 80032e6:	88fb      	ldrh	r3, [r7, #6]
+ 80032e8:	4a17      	ldr	r2, [pc, #92]	@ (8003348 <Uakb+0x2bc>)
+ 80032ea:	009b      	lsls	r3, r3, #2
+ 80032ec:	4413      	add	r3, r2
+ 80032ee:	edd3 7a00 	vldr	s15, [r3]
+ 80032f2:	ed97 7a00 	vldr	s14, [r7]
+ 80032f6:	ee77 7a27 	vadd.f32	s15, s14, s15
+ 80032fa:	edc7 7a00 	vstr	s15, [r7]
 			i++;
- 8003302:	88fb      	ldrh	r3, [r7, #6]
- 8003304:	3301      	adds	r3, #1
- 8003306:	80fb      	strh	r3, [r7, #6]
+ 80032fe:	88fb      	ldrh	r3, [r7, #6]
+ 8003300:	3301      	adds	r3, #1
+ 8003302:	80fb      	strh	r3, [r7, #6]
     }while(i<26);
- 8003308:	88fb      	ldrh	r3, [r7, #6]
- 800330a:	2b19      	cmp	r3, #25
- 800330c:	d9ed      	bls.n	80032ea <Uakb+0x25a>
+ 8003304:	88fb      	ldrh	r3, [r7, #6]
+ 8003306:	2b19      	cmp	r3, #25
+ 8003308:	d9ed      	bls.n	80032e6 <Uakb+0x25a>
     ZnUakb[1] = d + 1.2;//TODO!!! при отладке не хватает d;также изменено в Riz() //U  ab
- 800330e:	6838      	ldr	r0, [r7, #0]
- 8003310:	f7fd f91a 	bl	8000548 <__aeabi_f2d>
- 8003314:	f04f 3233 	mov.w	r2, #858993459	@ 0x33333333
- 8003318:	4b0e      	ldr	r3, [pc, #56]	@ (8003354 <Uakb+0x2c4>)
- 800331a:	f7fc ffb7 	bl	800028c <__adddf3>
- 800331e:	4602      	mov	r2, r0
- 8003320:	460b      	mov	r3, r1
- 8003322:	4610      	mov	r0, r2
- 8003324:	4619      	mov	r1, r3
- 8003326:	f7fd fc5f 	bl	8000be8 <__aeabi_d2f>
- 800332a:	4603      	mov	r3, r0
- 800332c:	4a07      	ldr	r2, [pc, #28]	@ (800334c <Uakb+0x2bc>)
- 800332e:	6053      	str	r3, [r2, #4]
+ 800330a:	6838      	ldr	r0, [r7, #0]
+ 800330c:	f7fd f91c 	bl	8000548 <__aeabi_f2d>
+ 8003310:	f04f 3233 	mov.w	r2, #858993459	@ 0x33333333
+ 8003314:	4b0e      	ldr	r3, [pc, #56]	@ (8003350 <Uakb+0x2c4>)
+ 8003316:	f7fc ffb9 	bl	800028c <__adddf3>
+ 800331a:	4602      	mov	r2, r0
+ 800331c:	460b      	mov	r3, r1
+ 800331e:	4610      	mov	r0, r2
+ 8003320:	4619      	mov	r1, r3
+ 8003322:	f7fd fc61 	bl	8000be8 <__aeabi_d2f>
+ 8003326:	4603      	mov	r3, r0
+ 8003328:	4a07      	ldr	r2, [pc, #28]	@ (8003348 <Uakb+0x2bc>)
+ 800332a:	6053      	str	r3, [r2, #4]
 		
     ZnUakb[27] = ZnU[27]; /*+5 V контр.*/
- 8003330:	4b05      	ldr	r3, [pc, #20]	@ (8003348 <Uakb+0x2b8>)
- 8003332:	6edb      	ldr	r3, [r3, #108]	@ 0x6c
- 8003334:	4a05      	ldr	r2, [pc, #20]	@ (800334c <Uakb+0x2bc>)
- 8003336:	66d3      	str	r3, [r2, #108]	@ 0x6c
+ 800332c:	4b05      	ldr	r3, [pc, #20]	@ (8003344 <Uakb+0x2b8>)
+ 800332e:	6edb      	ldr	r3, [r3, #108]	@ 0x6c
+ 8003330:	4a05      	ldr	r2, [pc, #20]	@ (8003348 <Uakb+0x2bc>)
+ 8003332:	66d3      	str	r3, [r2, #108]	@ 0x6c
     ZnUakb[28] = ZnU[28];/* delta Uo  */
- 8003338:	4b03      	ldr	r3, [pc, #12]	@ (8003348 <Uakb+0x2b8>)
- 800333a:	6f1b      	ldr	r3, [r3, #112]	@ 0x70
- 800333c:	4a03      	ldr	r2, [pc, #12]	@ (800334c <Uakb+0x2bc>)
- 800333e:	6713      	str	r3, [r2, #112]	@ 0x70
+ 8003334:	4b03      	ldr	r3, [pc, #12]	@ (8003344 <Uakb+0x2b8>)
+ 8003336:	6f1b      	ldr	r3, [r3, #112]	@ 0x70
+ 8003338:	4a03      	ldr	r2, [pc, #12]	@ (8003348 <Uakb+0x2bc>)
+ 800333a:	6713      	str	r3, [r2, #112]	@ 0x70
 
  }
- 8003340:	bf00      	nop
- 8003342:	3708      	adds	r7, #8
- 8003344:	46bd      	mov	sp, r7
- 8003346:	bd80      	pop	{r7, pc}
- 8003348:	20000820 	.word	0x20000820
- 800334c:	200008a4 	.word	0x200008a4
- 8003350:	200011f4 	.word	0x200011f4
- 8003354:	3ff33333 	.word	0x3ff33333
+ 800333c:	bf00      	nop
+ 800333e:	3708      	adds	r7, #8
+ 8003340:	46bd      	mov	sp, r7
+ 8003342:	bd80      	pop	{r7, pc}
+ 8003344:	20000820 	.word	0x20000820
+ 8003348:	200008a4 	.word	0x200008a4
+ 800334c:	200011f4 	.word	0x200011f4
+ 8003350:	3ff33333 	.word	0x3ff33333
 
-08003358 <Ubyte>:
+08003354 <Ubyte>:
 /*==============================================*/
 /*Преобразование напряжений АБ и Ак[i] из real в строку в byte*/
  void Ubyte(){
- 8003358:	b580      	push	{r7, lr}
- 800335a:	b088      	sub	sp, #32
- 800335c:	af00      	add	r7, sp, #0
+ 8003354:	b580      	push	{r7, lr}
+ 8003356:	b088      	sub	sp, #32
+ 8003358:	af00      	add	r7, sp, #0
  int width = 0;
- 800335e:	2300      	movs	r3, #0
- 8003360:	61bb      	str	r3, [r7, #24]
+ 800335a:	2300      	movs	r3, #0
+ 800335c:	61bb      	str	r3, [r7, #24]
  uint16_t t,s/*,r,q*/;
  char stx[10];	//формат СИ
 //TODO1
  ZnUakb[1] = ((float)((int)(ZnUakb[1]*100.)))/100.; /*округление до 100-ых*/
- 8003362:	4b4d      	ldr	r3, [pc, #308]	@ (8003498 <Ubyte+0x140>)
- 8003364:	685b      	ldr	r3, [r3, #4]
- 8003366:	4618      	mov	r0, r3
- 8003368:	f7fd f8ee 	bl	8000548 <__aeabi_f2d>
- 800336c:	f04f 0200 	mov.w	r2, #0
- 8003370:	4b4a      	ldr	r3, [pc, #296]	@ (800349c <Ubyte+0x144>)
- 8003372:	f7fd f941 	bl	80005f8 <__aeabi_dmul>
- 8003376:	4602      	mov	r2, r0
- 8003378:	460b      	mov	r3, r1
- 800337a:	4610      	mov	r0, r2
- 800337c:	4619      	mov	r1, r3
- 800337e:	f7fd fbeb 	bl	8000b58 <__aeabi_d2iz>
- 8003382:	ee07 0a90 	vmov	s15, r0
- 8003386:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
- 800338a:	eddf 6a45 	vldr	s13, [pc, #276]	@ 80034a0 <Ubyte+0x148>
- 800338e:	eec7 7a26 	vdiv.f32	s15, s14, s13
- 8003392:	4b41      	ldr	r3, [pc, #260]	@ (8003498 <Ubyte+0x140>)
- 8003394:	edc3 7a01 	vstr	s15, [r3, #4]
+ 800335e:	4b4d      	ldr	r3, [pc, #308]	@ (8003494 <Ubyte+0x140>)
+ 8003360:	685b      	ldr	r3, [r3, #4]
+ 8003362:	4618      	mov	r0, r3
+ 8003364:	f7fd f8f0 	bl	8000548 <__aeabi_f2d>
+ 8003368:	f04f 0200 	mov.w	r2, #0
+ 800336c:	4b4a      	ldr	r3, [pc, #296]	@ (8003498 <Ubyte+0x144>)
+ 800336e:	f7fd f943 	bl	80005f8 <__aeabi_dmul>
+ 8003372:	4602      	mov	r2, r0
+ 8003374:	460b      	mov	r3, r1
+ 8003376:	4610      	mov	r0, r2
+ 8003378:	4619      	mov	r1, r3
+ 800337a:	f7fd fbed 	bl	8000b58 <__aeabi_d2iz>
+ 800337e:	ee07 0a90 	vmov	s15, r0
+ 8003382:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+ 8003386:	eddf 6a45 	vldr	s13, [pc, #276]	@ 800349c <Ubyte+0x148>
+ 800338a:	eec7 7a26 	vdiv.f32	s15, s14, s13
+ 800338e:	4b41      	ldr	r3, [pc, #260]	@ (8003494 <Ubyte+0x140>)
+ 8003390:	edc3 7a01 	vstr	s15, [r3, #4]
 
   s = 1;
- 8003398:	2301      	movs	r3, #1
- 800339a:	83bb      	strh	r3, [r7, #28]
+ 8003394:	2301      	movs	r3, #1
+ 8003396:	83bb      	strh	r3, [r7, #28]
   t = 5;
- 800339c:	2305      	movs	r3, #5
- 800339e:	83fb      	strh	r3, [r7, #30]
+ 8003398:	2305      	movs	r3, #5
+ 800339a:	83fb      	strh	r3, [r7, #30]
   do{
 //  Str(ZnUakb[s]:6:3,stx);
       int width = sprintf(stx,"%6.3f\0",ZnUakb[s]);   //я┐╜я┐╜ я┐╜я┐╜сла я┐╜ я┐╜я┐╜рокя┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜ 6, я┐╜я┐╜сле я┐╜я┐╜я┐╜я┐╜той - 3 я┐╜я┐╜я┐╜я┐╜я┐╜, я┐╜ width я┐╜я┐╜я┐╜я┐╜твительная┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜рокя┐╜
- 80033a0:	8bbb      	ldrh	r3, [r7, #28]
- 80033a2:	4a3d      	ldr	r2, [pc, #244]	@ (8003498 <Ubyte+0x140>)
- 80033a4:	009b      	lsls	r3, r3, #2
- 80033a6:	4413      	add	r3, r2
- 80033a8:	681b      	ldr	r3, [r3, #0]
- 80033aa:	4618      	mov	r0, r3
- 80033ac:	f7fd f8cc 	bl	8000548 <__aeabi_f2d>
- 80033b0:	4602      	mov	r2, r0
- 80033b2:	460b      	mov	r3, r1
- 80033b4:	1d38      	adds	r0, r7, #4
- 80033b6:	493b      	ldr	r1, [pc, #236]	@ (80034a4 <Ubyte+0x14c>)
- 80033b8:	f009 f812 	bl	800c3e0 <siprintf>
- 80033bc:	6178      	str	r0, [r7, #20]
+ 800339c:	8bbb      	ldrh	r3, [r7, #28]
+ 800339e:	4a3d      	ldr	r2, [pc, #244]	@ (8003494 <Ubyte+0x140>)
+ 80033a0:	009b      	lsls	r3, r3, #2
+ 80033a2:	4413      	add	r3, r2
+ 80033a4:	681b      	ldr	r3, [r3, #0]
+ 80033a6:	4618      	mov	r0, r3
+ 80033a8:	f7fd f8ce 	bl	8000548 <__aeabi_f2d>
+ 80033ac:	4602      	mov	r2, r0
+ 80033ae:	460b      	mov	r3, r1
+ 80033b0:	1d38      	adds	r0, r7, #4
+ 80033b2:	493b      	ldr	r1, [pc, #236]	@ (80034a0 <Ubyte+0x14c>)
+ 80033b4:	f009 f814 	bl	800c3e0 <siprintf>
+ 80033b8:	6178      	str	r0, [r7, #20]
 		if (width != 6){//ошибка!!!
       }
       ZnTekI[t]  = stx[0];
- 80033be:	8bfb      	ldrh	r3, [r7, #30]
- 80033c0:	7939      	ldrb	r1, [r7, #4]
- 80033c2:	4a39      	ldr	r2, [pc, #228]	@ (80034a8 <Ubyte+0x150>)
- 80033c4:	54d1      	strb	r1, [r2, r3]
+ 80033ba:	8bfb      	ldrh	r3, [r7, #30]
+ 80033bc:	7939      	ldrb	r1, [r7, #4]
+ 80033be:	4a39      	ldr	r2, [pc, #228]	@ (80034a4 <Ubyte+0x150>)
+ 80033c0:	54d1      	strb	r1, [r2, r3]
       ZnTekI[t+1] = stx[1];
- 80033c6:	8bfb      	ldrh	r3, [r7, #30]
- 80033c8:	3301      	adds	r3, #1
- 80033ca:	7979      	ldrb	r1, [r7, #5]
- 80033cc:	4a36      	ldr	r2, [pc, #216]	@ (80034a8 <Ubyte+0x150>)
- 80033ce:	54d1      	strb	r1, [r2, r3]
+ 80033c2:	8bfb      	ldrh	r3, [r7, #30]
+ 80033c4:	3301      	adds	r3, #1
+ 80033c6:	7979      	ldrb	r1, [r7, #5]
+ 80033c8:	4a36      	ldr	r2, [pc, #216]	@ (80034a4 <Ubyte+0x150>)
+ 80033ca:	54d1      	strb	r1, [r2, r3]
       ZnTekI[t+2] = stx[2];
- 80033d0:	8bfb      	ldrh	r3, [r7, #30]
- 80033d2:	3302      	adds	r3, #2
- 80033d4:	79b9      	ldrb	r1, [r7, #6]
- 80033d6:	4a34      	ldr	r2, [pc, #208]	@ (80034a8 <Ubyte+0x150>)
- 80033d8:	54d1      	strb	r1, [r2, r3]
+ 80033cc:	8bfb      	ldrh	r3, [r7, #30]
+ 80033ce:	3302      	adds	r3, #2
+ 80033d0:	79b9      	ldrb	r1, [r7, #6]
+ 80033d2:	4a34      	ldr	r2, [pc, #208]	@ (80034a4 <Ubyte+0x150>)
+ 80033d4:	54d1      	strb	r1, [r2, r3]
       ZnTekI[t+3] = stx[3];
- 80033da:	8bfb      	ldrh	r3, [r7, #30]
- 80033dc:	3303      	adds	r3, #3
- 80033de:	79f9      	ldrb	r1, [r7, #7]
- 80033e0:	4a31      	ldr	r2, [pc, #196]	@ (80034a8 <Ubyte+0x150>)
- 80033e2:	54d1      	strb	r1, [r2, r3]
+ 80033d6:	8bfb      	ldrh	r3, [r7, #30]
+ 80033d8:	3303      	adds	r3, #3
+ 80033da:	79f9      	ldrb	r1, [r7, #7]
+ 80033dc:	4a31      	ldr	r2, [pc, #196]	@ (80034a4 <Ubyte+0x150>)
+ 80033de:	54d1      	strb	r1, [r2, r3]
       ZnTekI[t+4] = stx[4];
- 80033e4:	8bfb      	ldrh	r3, [r7, #30]
- 80033e6:	3304      	adds	r3, #4
- 80033e8:	7a39      	ldrb	r1, [r7, #8]
- 80033ea:	4a2f      	ldr	r2, [pc, #188]	@ (80034a8 <Ubyte+0x150>)
- 80033ec:	54d1      	strb	r1, [r2, r3]
+ 80033e0:	8bfb      	ldrh	r3, [r7, #30]
+ 80033e2:	3304      	adds	r3, #4
+ 80033e4:	7a39      	ldrb	r1, [r7, #8]
+ 80033e6:	4a2f      	ldr	r2, [pc, #188]	@ (80034a4 <Ubyte+0x150>)
+ 80033e8:	54d1      	strb	r1, [r2, r3]
       ZnTekI[t+5] = stx[5];
- 80033ee:	8bfb      	ldrh	r3, [r7, #30]
- 80033f0:	3305      	adds	r3, #5
- 80033f2:	7a79      	ldrb	r1, [r7, #9]
- 80033f4:	4a2c      	ldr	r2, [pc, #176]	@ (80034a8 <Ubyte+0x150>)
- 80033f6:	54d1      	strb	r1, [r2, r3]
+ 80033ea:	8bfb      	ldrh	r3, [r7, #30]
+ 80033ec:	3305      	adds	r3, #5
+ 80033ee:	7a79      	ldrb	r1, [r7, #9]
+ 80033f0:	4a2c      	ldr	r2, [pc, #176]	@ (80034a4 <Ubyte+0x150>)
+ 80033f2:	54d1      	strb	r1, [r2, r3]
       t = t + 10;
- 80033f8:	8bfb      	ldrh	r3, [r7, #30]
- 80033fa:	330a      	adds	r3, #10
- 80033fc:	83fb      	strh	r3, [r7, #30]
+ 80033f4:	8bfb      	ldrh	r3, [r7, #30]
+ 80033f6:	330a      	adds	r3, #10
+ 80033f8:	83fb      	strh	r3, [r7, #30]
       s++;
- 80033fe:	8bbb      	ldrh	r3, [r7, #28]
- 8003400:	3301      	adds	r3, #1
- 8003402:	83bb      	strh	r3, [r7, #28]
+ 80033fa:	8bbb      	ldrh	r3, [r7, #28]
+ 80033fc:	3301      	adds	r3, #1
+ 80033fe:	83bb      	strh	r3, [r7, #28]
   }while(t < 255);
- 8003404:	8bfb      	ldrh	r3, [r7, #30]
- 8003406:	2bfe      	cmp	r3, #254	@ 0xfe
- 8003408:	d9ca      	bls.n	80033a0 <Ubyte+0x48>
+ 8003400:	8bfb      	ldrh	r3, [r7, #30]
+ 8003402:	2bfe      	cmp	r3, #254	@ 0xfe
+ 8003404:	d9ca      	bls.n	800339c <Ubyte+0x48>
 
 //  Str(ZnUakb[1]:6:3,stx);
   width = sprintf(stx,"%6.3f\0",ZnUakb[1]);   //я┐╜я┐╜ я┐╜я┐╜сла я┐╜ я┐╜я┐╜рокя┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜ 6, я┐╜я┐╜сле я┐╜я┐╜я┐╜я┐╜той - 3 я┐╜я┐╜я┐╜я┐╜я┐╜, я┐╜ width я┐╜я┐╜я┐╜я┐╜твительная┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜рокя┐╜
- 800340a:	4b23      	ldr	r3, [pc, #140]	@ (8003498 <Ubyte+0x140>)
- 800340c:	685b      	ldr	r3, [r3, #4]
- 800340e:	4618      	mov	r0, r3
- 8003410:	f7fd f89a 	bl	8000548 <__aeabi_f2d>
- 8003414:	4602      	mov	r2, r0
- 8003416:	460b      	mov	r3, r1
- 8003418:	1d38      	adds	r0, r7, #4
- 800341a:	4922      	ldr	r1, [pc, #136]	@ (80034a4 <Ubyte+0x14c>)
- 800341c:	f008 ffe0 	bl	800c3e0 <siprintf>
- 8003420:	61b8      	str	r0, [r7, #24]
+ 8003406:	4b23      	ldr	r3, [pc, #140]	@ (8003494 <Ubyte+0x140>)
+ 8003408:	685b      	ldr	r3, [r3, #4]
+ 800340a:	4618      	mov	r0, r3
+ 800340c:	f7fd f89c 	bl	8000548 <__aeabi_f2d>
+ 8003410:	4602      	mov	r2, r0
+ 8003412:	460b      	mov	r3, r1
+ 8003414:	1d38      	adds	r0, r7, #4
+ 8003416:	4922      	ldr	r1, [pc, #136]	@ (80034a0 <Ubyte+0x14c>)
+ 8003418:	f008 ffe2 	bl	800c3e0 <siprintf>
+ 800341c:	61b8      	str	r0, [r7, #24]
   if (width != 6){//я┐╜шибя┐╜я┐╜!!!
   }
   ZnArxI[16] = stx[0];
- 8003422:	793a      	ldrb	r2, [r7, #4]
- 8003424:	4b21      	ldr	r3, [pc, #132]	@ (80034ac <Ubyte+0x154>)
- 8003426:	741a      	strb	r2, [r3, #16]
+ 800341e:	793a      	ldrb	r2, [r7, #4]
+ 8003420:	4b21      	ldr	r3, [pc, #132]	@ (80034a8 <Ubyte+0x154>)
+ 8003422:	741a      	strb	r2, [r3, #16]
   ZnArxI[17] = stx[1];
- 8003428:	797a      	ldrb	r2, [r7, #5]
- 800342a:	4b20      	ldr	r3, [pc, #128]	@ (80034ac <Ubyte+0x154>)
- 800342c:	745a      	strb	r2, [r3, #17]
+ 8003424:	797a      	ldrb	r2, [r7, #5]
+ 8003426:	4b20      	ldr	r3, [pc, #128]	@ (80034a8 <Ubyte+0x154>)
+ 8003428:	745a      	strb	r2, [r3, #17]
   ZnArxI[18] = stx[3];
- 800342e:	79fa      	ldrb	r2, [r7, #7]
- 8003430:	4b1e      	ldr	r3, [pc, #120]	@ (80034ac <Ubyte+0x154>)
- 8003432:	749a      	strb	r2, [r3, #18]
+ 800342a:	79fa      	ldrb	r2, [r7, #7]
+ 800342c:	4b1e      	ldr	r3, [pc, #120]	@ (80034a8 <Ubyte+0x154>)
+ 800342e:	749a      	strb	r2, [r3, #18]
   ZnArxI[19] = stx[4];
- 8003434:	7a3a      	ldrb	r2, [r7, #8]
- 8003436:	4b1d      	ldr	r3, [pc, #116]	@ (80034ac <Ubyte+0x154>)
- 8003438:	74da      	strb	r2, [r3, #19]
+ 8003430:	7a3a      	ldrb	r2, [r7, #8]
+ 8003432:	4b1d      	ldr	r3, [pc, #116]	@ (80034a8 <Ubyte+0x154>)
+ 8003434:	74da      	strb	r2, [r3, #19]
    do{
        ZnArxIc[r+15]= ZnArxI[r+15];	//TODO1 ???
        r++;
    }while(r < 5);*/
 
   s = 2;
- 800343a:	2302      	movs	r3, #2
- 800343c:	83bb      	strh	r3, [r7, #28]
+ 8003436:	2302      	movs	r3, #2
+ 8003438:	83bb      	strh	r3, [r7, #28]
   t = 20;
- 800343e:	2314      	movs	r3, #20
- 8003440:	83fb      	strh	r3, [r7, #30]
+ 800343a:	2314      	movs	r3, #20
+ 800343c:	83fb      	strh	r3, [r7, #30]
   do{
 //  Str(ZnUakb[s]:6:3,stx);
       int width = sprintf(stx,"%6.3f\0",ZnUakb[s]);   //я┐╜я┐╜ я┐╜я┐╜сла я┐╜ я┐╜я┐╜рокя┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜ 6, я┐╜я┐╜сле я┐╜я┐╜я┐╜я┐╜той - 3 я┐╜я┐╜я┐╜я┐╜я┐╜, я┐╜ width я┐╜я┐╜я┐╜я┐╜твительная┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ я┐╜я┐╜рокя┐╜
- 8003442:	8bbb      	ldrh	r3, [r7, #28]
- 8003444:	4a14      	ldr	r2, [pc, #80]	@ (8003498 <Ubyte+0x140>)
- 8003446:	009b      	lsls	r3, r3, #2
- 8003448:	4413      	add	r3, r2
- 800344a:	681b      	ldr	r3, [r3, #0]
- 800344c:	4618      	mov	r0, r3
- 800344e:	f7fd f87b 	bl	8000548 <__aeabi_f2d>
- 8003452:	4602      	mov	r2, r0
- 8003454:	460b      	mov	r3, r1
- 8003456:	1d38      	adds	r0, r7, #4
- 8003458:	4912      	ldr	r1, [pc, #72]	@ (80034a4 <Ubyte+0x14c>)
- 800345a:	f008 ffc1 	bl	800c3e0 <siprintf>
- 800345e:	6138      	str	r0, [r7, #16]
+ 800343e:	8bbb      	ldrh	r3, [r7, #28]
+ 8003440:	4a14      	ldr	r2, [pc, #80]	@ (8003494 <Ubyte+0x140>)
+ 8003442:	009b      	lsls	r3, r3, #2
+ 8003444:	4413      	add	r3, r2
+ 8003446:	681b      	ldr	r3, [r3, #0]
+ 8003448:	4618      	mov	r0, r3
+ 800344a:	f7fd f87d 	bl	8000548 <__aeabi_f2d>
+ 800344e:	4602      	mov	r2, r0
+ 8003450:	460b      	mov	r3, r1
+ 8003452:	1d38      	adds	r0, r7, #4
+ 8003454:	4912      	ldr	r1, [pc, #72]	@ (80034a0 <Ubyte+0x14c>)
+ 8003456:	f008 ffc3 	bl	800c3e0 <siprintf>
+ 800345a:	6138      	str	r0, [r7, #16]
       if (width != 6){//ошибка!!!
       }
       ZnArxI[t]   = stx[1];
- 8003460:	8bfb      	ldrh	r3, [r7, #30]
- 8003462:	7979      	ldrb	r1, [r7, #5]
- 8003464:	4a11      	ldr	r2, [pc, #68]	@ (80034ac <Ubyte+0x154>)
- 8003466:	54d1      	strb	r1, [r2, r3]
+ 800345c:	8bfb      	ldrh	r3, [r7, #30]
+ 800345e:	7979      	ldrb	r1, [r7, #5]
+ 8003460:	4a11      	ldr	r2, [pc, #68]	@ (80034a8 <Ubyte+0x154>)
+ 8003462:	54d1      	strb	r1, [r2, r3]
       ZnArxI[t+1] = stx[3];
- 8003468:	8bfb      	ldrh	r3, [r7, #30]
- 800346a:	3301      	adds	r3, #1
- 800346c:	79f9      	ldrb	r1, [r7, #7]
- 800346e:	4a0f      	ldr	r2, [pc, #60]	@ (80034ac <Ubyte+0x154>)
- 8003470:	54d1      	strb	r1, [r2, r3]
+ 8003464:	8bfb      	ldrh	r3, [r7, #30]
+ 8003466:	3301      	adds	r3, #1
+ 8003468:	79f9      	ldrb	r1, [r7, #7]
+ 800346a:	4a0f      	ldr	r2, [pc, #60]	@ (80034a8 <Ubyte+0x154>)
+ 800346c:	54d1      	strb	r1, [r2, r3]
       ZnArxI[t+2] = stx[4];
- 8003472:	8bfb      	ldrh	r3, [r7, #30]
- 8003474:	3302      	adds	r3, #2
- 8003476:	7a39      	ldrb	r1, [r7, #8]
- 8003478:	4a0c      	ldr	r2, [pc, #48]	@ (80034ac <Ubyte+0x154>)
- 800347a:	54d1      	strb	r1, [r2, r3]
+ 800346e:	8bfb      	ldrh	r3, [r7, #30]
+ 8003470:	3302      	adds	r3, #2
+ 8003472:	7a39      	ldrb	r1, [r7, #8]
+ 8003474:	4a0c      	ldr	r2, [pc, #48]	@ (80034a8 <Ubyte+0x154>)
+ 8003476:	54d1      	strb	r1, [r2, r3]
       t = t + 3;
- 800347c:	8bfb      	ldrh	r3, [r7, #30]
- 800347e:	3303      	adds	r3, #3
- 8003480:	83fb      	strh	r3, [r7, #30]
+ 8003478:	8bfb      	ldrh	r3, [r7, #30]
+ 800347a:	3303      	adds	r3, #3
+ 800347c:	83fb      	strh	r3, [r7, #30]
       s++;
- 8003482:	8bbb      	ldrh	r3, [r7, #28]
- 8003484:	3301      	adds	r3, #1
- 8003486:	83bb      	strh	r3, [r7, #28]
+ 800347e:	8bbb      	ldrh	r3, [r7, #28]
+ 8003480:	3301      	adds	r3, #1
+ 8003482:	83bb      	strh	r3, [r7, #28]
   }while(s < 26);
- 8003488:	8bbb      	ldrh	r3, [r7, #28]
- 800348a:	2b19      	cmp	r3, #25
- 800348c:	d9d9      	bls.n	8003442 <Ubyte+0xea>
+ 8003484:	8bbb      	ldrh	r3, [r7, #28]
+ 8003486:	2b19      	cmp	r3, #25
+ 8003488:	d9d9      	bls.n	800343e <Ubyte+0xea>
    /*r = 1;
    do{
        ZnArxIc[r+19] = ZnArxI[r+19];	//TODO ???
        r++;
    }while(r < 73);*/
 }
- 800348e:	bf00      	nop
- 8003490:	bf00      	nop
- 8003492:	3720      	adds	r7, #32
- 8003494:	46bd      	mov	sp, r7
- 8003496:	bd80      	pop	{r7, pc}
- 8003498:	200008a4 	.word	0x200008a4
- 800349c:	40590000 	.word	0x40590000
- 80034a0:	42c80000 	.word	0x42c80000
- 80034a4:	0800fecc 	.word	0x0800fecc
- 80034a8:	20000284 	.word	0x20000284
- 80034ac:	200009ac 	.word	0x200009ac
+ 800348a:	bf00      	nop
+ 800348c:	bf00      	nop
+ 800348e:	3720      	adds	r7, #32
+ 8003490:	46bd      	mov	sp, r7
+ 8003492:	bd80      	pop	{r7, pc}
+ 8003494:	200008a4 	.word	0x200008a4
+ 8003498:	40590000 	.word	0x40590000
+ 800349c:	42c80000 	.word	0x42c80000
+ 80034a0:	0800fecc 	.word	0x0800fecc
+ 80034a4:	20000284 	.word	0x20000284
+ 80034a8:	200009ac 	.word	0x200009ac
+ 80034ac:	00000000 	.word	0x00000000
 
 080034b0 <GrU>:
 /*==============================================*/
@@ -11101,9 +11101,9 @@ L2:                     /* опрос состояния АБ */
  800542a:	4867      	ldr	r0, [pc, #412]	@ (80055c8 <mainProgram+0x600>)
  800542c:	f7fe feca 	bl	80041c4 <sendDebug>
     Uakb();
- 8005430:	f7fd fe2e 	bl	8003090 <Uakb>
+ 8005430:	f7fd fe2c 	bl	800308c <Uakb>
     Ubyte();
- 8005434:	f7fd ff90 	bl	8003358 <Ubyte>
+ 8005434:	f7fd ff8e 	bl	8003354 <Ubyte>
     GrU();
  8005438:	f7fe f83a 	bl	80034b0 <GrU>
   KFUcht();
@@ -13548,9 +13548,9 @@ L76: RDate2();/*запись текущего времени и даты в ZnTe
     izmU();
  80068f6:	f7fc f9bf 	bl	8002c78 <izmU>
     Uakb();
- 80068fa:	f7fc fbc9 	bl	8003090 <Uakb>
+ 80068fa:	f7fc fbc7 	bl	800308c <Uakb>
     Ubyte();
- 80068fe:	f7fc fd2b 	bl	8003358 <Ubyte>
+ 80068fe:	f7fc fd29 	bl	8003354 <Ubyte>
     GrU();
  8006902:	f7fc fdd5 	bl	80034b0 <GrU>
   KFIIcht();
@@ -15760,9 +15760,9 @@ L72:
  8007b44:	4879      	ldr	r0, [pc, #484]	@ (8007d2c <mainProgram+0x2d64>)
  8007b46:	f7fc fb3d 	bl	80041c4 <sendDebug>
     Uakb();
- 8007b4a:	f7fb faa1 	bl	8003090 <Uakb>
+ 8007b4a:	f7fb fa9f 	bl	800308c <Uakb>
     Ubyte();
- 8007b4e:	f7fb fc03 	bl	8003358 <Ubyte>
+ 8007b4e:	f7fb fc01 	bl	8003354 <Ubyte>
     GrU();
  8007b52:	f7fb fcad 	bl	80034b0 <GrU>
     i = 1;

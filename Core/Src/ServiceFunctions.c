@@ -576,7 +576,7 @@ L1:   ZnTekI[300] =  PrSab;
     j = 1;
     do{
         izmZn = ADC0();
-        HAL_Delay(100);
+        //HAL_Delay(100);
         ZnUU[j] = fabs(izmZn);
         j++;
     //}while(j < 6);
