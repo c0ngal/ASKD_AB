@@ -267,6 +267,7 @@ uint16_t getADC_SPI(uint8_t num){
 
 	//HAL_GPIO_WritePin(FSS_MK_GPIO_Port,FSS_MK_Pin,GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_RESET);
+	HAL_Delay(1);
 	HAL_SPI_Transmit(&hspi2,Cmd,1,1000);//байт начала сообщения
 //	HAL_SPI_Transmit(&hspi3,&Cmd[1],1,1000);//номер платы
 	HAL_SPI_Transmit(&hspi2,&num,1,1000);//номер ввода

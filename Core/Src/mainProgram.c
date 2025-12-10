@@ -2027,7 +2027,7 @@ L72:
      ZnU[27] =  0;
      //port[AdAK] = 0x3A;
 		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
-     delay_ms(100);
+     delay_ms(500);
      izmZn = ADC0();
      ZnU[27] = izmZn;	//TODO!!! не работает 2ая МК АК => не мерим 5В контр
   if ((4.6 < ZnU[27]) && (ZnU[27] < 5.1)){
