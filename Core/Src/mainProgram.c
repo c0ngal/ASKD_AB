@@ -1773,7 +1773,7 @@ L74:  Rbyte = GetByte(AdrRY);
      ZnX[i] =  Rbyte;
      i++;
   if (Rbyte != KT) goto L74;
-  d =  ZnX[i-2];
+  d =  ZnX[2];
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/

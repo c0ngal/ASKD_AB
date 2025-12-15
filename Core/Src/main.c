@@ -67,7 +67,7 @@ volatile uint8_t  rxbuf[RX_BUF_SZ];
 volatile uint16_t rxlen = 0;
 
 #define TEK_LEN 766
-extern void SendByte(unsigned char adr, uint8_t b);  // как у тебя в проекте
+extern void SendByte(unsigned char adr, uint8_t b);
 extern const uint16_t AdrRY;
 
 #define KT  0x03
@@ -557,8 +557,8 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x0;
-  sTime.Minutes = 0x0;
+  sTime.Hours = 0x10;
+  sTime.Minutes = 0x13;
   sTime.Seconds = 0x0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
@@ -567,9 +567,9 @@ static void MX_RTC_Init(void)
     Error_Handler();
   }
   sDate.WeekDay = RTC_WEEKDAY_MONDAY;
-  sDate.Month = RTC_MONTH_JANUARY;
-  sDate.Date = 0x1;
-  sDate.Year = 0x0;
+  sDate.Month = RTC_MONTH_DECEMBER;
+  sDate.Date = 0x15;
+  sDate.Year = 0x25;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {

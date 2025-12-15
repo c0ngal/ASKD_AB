@@ -98,7 +98,7 @@ uint16_t getYear(){//возвращает значение за вычитом 2
 	HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
 	HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 
-	return 2000 + sDate.Year;
+	return /*2000 +*/ sDate.Year;
 }
 uint8_t getMonth(){
 	RTC_DateTypeDef sDate;
