@@ -1772,7 +1772,7 @@ L73:
 L74:  Rbyte = GetByte(AdrRY);
      ZnX[i] =  Rbyte;
      i++;
-  if (Rbyte != 0x03) goto L74;
+  if (Rbyte != KT) goto L74;
   d =  ZnX[i-2];
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
@@ -2505,9 +2505,9 @@ L36:
 		 ZnUTekI[1] = 0x99;ZnUTekI[2] = 0x99;ZnUTekI[3] = 0x99;ZnUTekI[4] = 0x99;
 
 //for(i=0;i<1;i++)SendByte(AdrRY,i+10);
-		 
+	HAL_Delay(4000);
      for(i=1;i<=765;i++){ SendByte(AdrRY,ZnUTekI[i]);
-			 delay_ms(1);
+			 //delay_ms(1);
 		 }
 //SendByte(AdrRY,0x03);SendByte(AdrRY,0x03);SendByte(AdrRY,0x03);SendByte(AdrRY,0x03);SendByte(AdrRY,0x03);
 
