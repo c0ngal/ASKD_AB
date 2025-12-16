@@ -5,6 +5,7 @@
 #include "UART.h"
 #include "UNIO.h"
 #include "ADC.h"
+#include <ctype.h>
 
  uint8_t Rbyte;
  uint8_t ssVixA3;
@@ -1773,7 +1774,9 @@ L74:  Rbyte = GetByte(AdrRY);
      ZnX[i] =  Rbyte;
      i++;
   if (Rbyte != KT) goto L74;
-  d =  ZnX[2];
+
+  while (!isalpha(ZnX[i])) --i;
+  d =  ZnX[i];
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/
