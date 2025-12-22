@@ -345,7 +345,7 @@ void RTekI(void){
  /*Чтение архива из внешнего файла и запись его в массив ZnArxI[i](ZnArxIc[i])*/
  static void read_record(uint32_t base, uint32_t index){
      uint8_t rec[255];
-     flash_read(base + index*RECORD_SIZE, rec, 255);
+     Flash_Read(base + index*RECORD_SIZE, rec, 255);
      for (int k=0;k<255;k++) SendByte(AdrRY, rec[k]); // pascal
      SendByte(AdrRY, KT);
  }
