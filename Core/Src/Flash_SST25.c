@@ -14,6 +14,7 @@ int Rd_IDexROM(void){		 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ID SST25.
 
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(&hspi1,&CmdReadID,1,100);
+	HAL_SPI_Transmit(&hspi1,&Addr,1,100);
 	HAL_SPI_TransmitReceive(&hspi1,Addr,ID,5,100);
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
 	return ID[4];
@@ -88,6 +89,7 @@ void Sector4KB_Erase(int adr){
 
     Write_Enable();
 
+
     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
     HAL_SPI_Transmit(&hspi1,&CmdS4KB_Erase,1,100);
     HAL_SPI_Transmit(&hspi1,adrArr,3,100);
@@ -110,6 +112,17 @@ void Sector32KB_Erase(int adr){	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿
 	HAL_SPI_Transmit(&hspi1,&CmdS32KB_Erase,1,100);
 	HAL_SPI_Transmit(&hspi1,adrArr,3,100);
 	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
+
+	uint8_t cmd = 0x05;
+	uint8_t rx = 1;
+	while (rx & 0x01 != 0) {
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
+		HAL_SPI_Transmit(&hspi1,&cmd,1,100);
+		HAL_SPI_Receive(&hspi1,&rx,1,100);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
+	}
+
+
 
 	HAL_Delay(25);
 }
@@ -388,4 +401,37 @@ struct tLCTable ReadLCTable(uint8_t antNum, uint16_t tableNum){
 }
 
 void WriteLCTable(uint8_t antNum, uint16_t tableNum,struct tLCTable LCTable){
+}
+
+
+void Flash_PageProgram(uint32_t addr, uint8_t *data, uint16_t len) {
+    uint8_t cmd[4];
+    cmd[0] = 0x02; // PAGE PROGRAM
+    cmd[1] = (addr >> 16) & 0xFF;
+    cmd[2] = (addr >> 8)  & 0xFF;
+    cmd[3] = (addr)       & 0xFF;
+    uint8_t *p = data;
+    uint32_t adr = addr;
+    uint8_t dr;
+    for ( ; adr < addr + len; ++adr) {
+    	ByteProgram(adr,*data++);
+    	//dr = data[adr];
+    	//Flash_Read(adr, &dr, 1);
+    }
+
+}
+
+void Flash_Read(uint32_t addr, uint8_t *data, uint16_t len) {
+	uint8_t CmdDataRead = 0x03;
+	uint8_t adrArr[3] = {0};
+	uint8_t nullTxForRx[20] = {0};
+    adrArr[0] = (addr >> 16) & 0xFF;
+    adrArr[1] = (addr >>  8) & 0xFF;
+    adrArr[2] = (addr      ) & 0xFF;
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1,&CmdDataRead,1,100);
+	HAL_SPI_Transmit(&hspi1,adrArr,3,100);
+	HAL_SPI_Receive(&hspi1, data, len, 100);
+	//HAL_SPI_TransmitReceive(&hspi1,nullTxForRx,data,len,100);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
 }

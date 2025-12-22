@@ -31,7 +31,7 @@
 #include "mainProgram.h"
 #include "ServiceFunctions.h"
 #include "stm32f4xx_hal.h"
-
+#include "flash_ext.h"
 //extern struct tLCTableFile;
 //extern void Chip_Erase(void);
 
@@ -133,119 +133,140 @@ uint8_t num = 0;
 uint8_t tx = 0xAA;
 uint8_t rx = 0;
 
+#define FLASH_CS_LOW()   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)
+#define FLASH_CS_HIGH()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)
 
-void send_tekinf_ok_example(void)
-{
-    memset(ZnUTekI, 0, TEK_LEN);   // остальное нулями (или заполни как нужно)
-    ZnUTekI[299] = '3';            // 300-я позиция для Pascal = индекс 299 в C
+uint8_t Flash_ReadStatus(void) {
+    uint8_t cmd = 0x05; // RDSR
+    uint8_t status = 0;
 
-    // Вариант 1: побайтно, как в проекте
-    for (int i = 0; i < TEK_LEN; ++i)
-        SendByte(AdrRY, ZnUTekI[i]);
+    FLASH_CS_LOW();
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, 100);
+    HAL_SPI_Receive(&hspi1, &status, 1, 100);
+    FLASH_CS_HIGH();
 
-    // Вариант 2: одним куском, если есть HAL UART напрямую
-    // HAL_UART_Transmit(&huart6, ZnUTekI, TEK_LEN, 100);
+    return status;
 }
-
-
-static inline void Bus_Enable(void)   { HAL_GPIO_WritePin(OE1_GPIO_Port, OE1_Pin, GPIO_PIN_RESET); HAL_GPIO_WritePin(OE2_GPIO_Port, OE2_Pin, GPIO_PIN_RESET); } // OE=0
-static inline void Bus_Disable(void)  { HAL_GPIO_WritePin(OE1_GPIO_Port, OE1_Pin, GPIO_PIN_SET);   HAL_GPIO_WritePin(OE2_GPIO_Port, OE2_Pin, GPIO_PIN_SET);   } // OE=1
-
-static void logf(const char* fmt, ...) {
-    char b[128]; va_list ap; va_start(ap, fmt);
-    int n = vsnprintf(b, sizeof(b), fmt, ap); va_end(ap);
-    HAL_UART_Transmit(&huart6, (uint8_t*)b, n, 1000);
-}
-
-
-
-
-
-static void send_dummy_answer(void)
-{
-    uint8_t buf[766];
-
-    // первые 765 байт – любой не-нулевой мусор
-    for (int i = 0; i < 765; i++) {
-        buf[i] = (uint8_t)('A'); // 'A'..'Z'
+void ByteProgram(int adr, uint8_t data);
+void Flash_WaitBusyClear(void) {
+    while (Flash_ReadStatus() & 0x01) {
+        // бит 0 = WIP (Write In Progress)
     }
-    // последний байт – KT
-    buf[765] = KT;
-
-    HAL_UART_Transmit(&huart6, buf, sizeof(buf), 1000);
 }
 
-void Flash_InitOnce(void)
-{
-    Enable_Write_Status_Reg();   // 0x50
-    Write_Status_Reg(0x00);      // снять все BP-биты, разрешить запись по всем блокам
+int Rd_IDexROM(void);
+
+void Chip_Erase(void);
+
+void Flash_WriteEnable(void) {
+    uint8_t cmd = 0x06; // WREN
+    FLASH_CS_LOW();
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, 100);
+    FLASH_CS_HIGH();
 }
 
-uint16_t uart_read_block_idle(UART_HandleTypeDef *huart,
-                              uint8_t *buf,
-                              uint16_t maxlen,
-                              uint32_t idle_ms,
-                              uint32_t total_timeout_ms)
-{
-    uint32_t start = HAL_GetTick();
-    uint16_t n = 0;
-    HAL_StatusTypeDef st;
+void Flash_Erase4K(uint32_t addr) {
+    uint8_t cmd[4];
+    cmd[0] = 0x20; // 4KB Sector Erase
+    cmd[1] = (addr >> 16) & 0xFF;
+    cmd[2] = (addr >> 8)  & 0xFF;
+    cmd[3] = (addr)       & 0xFF;
 
-    // 1. ждём первый байт
-    while ((HAL_GetTick() - start) < total_timeout_ms) {
-        uint8_t b;
-        st = HAL_UART_Receive(huart, &b, 1, 10); // короткий поллинг
+    Flash_WriteEnable();
 
-        if (st == HAL_OK) {
-            if (n < maxlen) buf[n++] = b;
-            break; // первый байт получили
-        } else if (st == HAL_ERROR) {
-            return 0; // что-то пошло совсем не так
-        }
-        // если TIMEOUT — просто крутимся дальше до total_timeout_ms
+    FLASH_CS_LOW();
+    HAL_SPI_Transmit(&hspi1, cmd, 4, 100);
+    FLASH_CS_HIGH();
+
+    Flash_WaitBusyClear();
+}
+
+void Sector32KB_Erase(int adr);
+void Sector4KB_Erase(int adr);
+
+void Flash_Read(uint32_t addr, uint8_t *data, uint16_t len);
+/*void Flash_PageProgram(uint32_t addr, uint8_t *data, uint16_t len) {
+    uint8_t cmd[4];
+    cmd[0] = 0x02; // PAGE PROGRAM
+    cmd[1] = (addr >> 16) & 0xFF;
+    cmd[2] = (addr >> 8)  & 0xFF;
+    cmd[3] = (addr)       & 0xFF;
+
+    uint32_t adr = addr;
+    uint8_t dr;
+    for ( ; adr < addr + len; ++adr) {
+    	ByteProgram(adr, data[adr]);
+    	//dr = data[adr];
+    	//Flash_Read(adr, &dr, 1);
     }
 
-    if (n == 0) {
-        // так и не получили ни одного байта
-        return 0;
+}*/
+
+
+/*void Flash_Read(uint32_t addr, uint8_t *data, uint16_t len) {
+	uint8_t CmdDataRead = 0x03;
+	uint8_t adrArr[3] = {0};
+	uint8_t nullTxForRx[20] = {0};
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1,&CmdDataRead,1,100);
+	HAL_SPI_Transmit(&hspi1,adrArr,3,100);
+	HAL_SPI_TransmitReceive(&hspi1,nullTxForRx,data,len,100);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
+}*/
+
+void Flash_Test(void) {
+    uint8_t tx[16];
+    uint8_t rx[16];
+    // 1) Заполняем буфер каким-нибудь понятным паттерном
+    for (int i = 0; i < 16; ++i) {
+        tx[i] = 0xA0 + i;   // A0 A1 A2 ... AF
+        rx[i] = 0;
     }
 
-    // 2. читаем остальные байты, пока нет "тишины" idle_ms
-    while (1) {
-        if (n >= maxlen) break;
+    // 2) Стираем сектор (важно!)
+    //Enable_Write_Status_Reg();
+    //Write_Status_Reg(0);
+    Sector4KB_Erase(0x000000);
+    ByteProgram(0x000000, 1);
+    uint8_t dt;
+    Flash_Read(0x000000, &dt, 1);
 
-        uint8_t b;
-        st = HAL_UART_Receive(huart, &b, 1, idle_ms);
+    // 3) Пишем эти 16 байт в начало
+    Flash_PageProgram(0x000000, tx, 16);
 
-        if (st == HAL_OK) {
-            buf[n++] = b;
-        } else if (st == HAL_TIMEOUT) {
-            // пауза >= idle_ms -> конец блока
-            break;
-        } else {
-            // HAL_ERROR / HAL_BUSY — выходим
-            break;
-        }
-    }
+    // 4) Читаем обратно
+    Flash_Read(0x000000, rx, 16);
 
-    return n;
+    int ok = 1;
+
 }
 
 
-static void spi1_master_send_test(void)
+void Flash_ReadID()
 {
-    uint8_t tx[4] = {0x11, 0x22, 0x33, 0x44};
+	FLASH_CS_HIGH();
+	HAL_Delay(2);
+    uint8_t cmd = 0x05;
+    uint8_t rx[3] = {0};
 
-    // Если NSS у тебя обычный GPIO:
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET); // CS ↓
+    FLASH_CS_LOW();
 
-    HAL_StatusTypeDef st = HAL_SPI_Transmit(&hspi1, tx, sizeof(tx), 100);
+    // отправляем команду 0x9F
+    HAL_SPI_Transmit(&hspi1, &cmd, 1, 100);
 
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);   // CS ↑
+    // читаем 3 байта ID
+    HAL_SPI_Receive(&hspi1, rx, 3, 100);
 
-    // Можно посмотреть статус
-    // if (st != HAL_OK) { ... }
+    FLASH_CS_HIGH();
+
 }
+
+
+
+
+
+
+
 
 /* USER CODE END 0 */
 
@@ -288,9 +309,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(FSS_ISA_GPIO_Port, FSS_ISA_Pin, GPIO_PIN_SET);
 
+  Enable_Write_Status_Reg();
+  Write_Status_Reg(0);
 
-  //Flash_InitOnce();
-
+//while (1) {
+  //Flash_ReadID();
+//}
+  //Flash_Test();
 
   RTekI();
   //izmU();
@@ -317,7 +342,22 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  //пgоверить флешку через read_id
+	  //write void SaveCanal(struct tCanalFile FileCanal)
+	  /*int i=0,j=0;
+		Sector4KB_Erase(canalFileAdr);
+		Sector4KB_Erase(canalFileAdr+0x1000);
+		HAL_Delay(30);
+		for(i=0;i < 1000;i++){
+			for(j=0;j < 7;j++)
+				ByteProgram(canalFileAdr + i*7 + j, FileCanal.canals[i].F[j]);
+		  ByteProgram(canalFileAdr + i*7 + 7, FileCanal.canals[i].P);*/
+	  //read
+		/*HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_RESET);
+		HAL_SPI_Transmit(&hspi1,&CmdDataRead,1,100);
+		HAL_SPI_Transmit(&hspi1,adrArr,3,100);
+		HAL_SPI_TransmitReceive(&hspi1,nullTxForRx,(uint8_t*)res.data,20,100);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);*/ //struct tConfFile ReadConfFile(void)
 
 	      // 1) отправляем команду 0xF0
 	      /*HAL_SPI_TransmitReceive(&hspi2, &cmdStart, &dummy, 1, HAL_MAX_DELAY);
@@ -711,7 +751,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
+  huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

@@ -1,8 +1,11 @@
 #include "flash_ext.h"
 
+
 static SPI_HandleTypeDef *s_hspi = NULL;
 static GPIO_TypeDef *s_cs_port = NULL;
 static uint16_t s_cs_pin = 0;
+
+extern SPI_HandleTypeDef hspi1;
 
 static inline void CS_L(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_RESET); }
 static inline void CS_H(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_SET); }
@@ -103,7 +106,11 @@ HAL_StatusTypeDef flash_write(uint32_t addr, const uint8_t *buf, size_t len){
         len  -= chunk;
     }
     return HAL_OK;
+
+
 }
+
+
 
 uint32_t flash_read_id(void){
     uint8_t cmd = CMD_READ_ID;
@@ -114,3 +121,8 @@ uint32_t flash_read_id(void){
     CS_H();
     return ((uint32_t)id[0]<<16)|((uint32_t)id[1]<<8)|id[2];
 }
+
+
+
+
+

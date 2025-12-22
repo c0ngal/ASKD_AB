@@ -4,6 +4,7 @@
 #include "UART.h"
 #include <stdint.h>
 #include "flash_ext.h"
+#include "Flash_SSt25.h"
 
 uint8_t ZnS[65];//формат Pascal =>64+1=65
 uint8_t ZnTekI[766];//формат Pascal =>765+1=766
@@ -99,10 +100,17 @@ void RdArxByte1636RR4(uint32_t addr)
   /*Запись заводского номера в ZnTekI(ZnTekIс) при вводе*/
  void ZapZN(){
   uint16_t r = 2;
-  do{
+  int cr = r;
+  while (ZnX[cr] != 'N') ++cr;
+  int i = cr + 1;
+  int j = 2;
+  for ( ; i <= cr + 10; ++i, ++j) {
+	  ZnTekI[j + 360] = ZnX[i];
+  }
+  /*do{
   ZnTekI[r+360] = ZnX[r];
   r++;
-  }while(r < 12);
+  }while(r < 12);*/
 //Orig - не соответствует заиси => неправильный ответ на оманду
 /*  do{
   ZnTekI[r+363] = ZnX[r];
@@ -119,10 +127,18 @@ void RdArxByte1636RR4(uint32_t addr)
  //Запись даты изготовления в ZnTekI(ZnTekIс) при вводе
  void ZapDI(){
   uint16_t r = 2;
-  do{
+  int cr = r;
+  while (ZnX[cr] != 'W') ++cr;
+  int i = cr + 1;
+  int j = 2;
+  for ( ; i <= cr + 6; ++i, ++j) {
+	  ZnTekI[j + 371] = ZnX[i];
+  }
+
+  /*do{
   ZnTekI[r+371] = ZnX[r];
   r++;
- }while (r < 8);
+ }while (r < 8);*/
 
 /*  r = 373;
   do{
@@ -168,10 +184,12 @@ void RdArxByte1636RR4(uint32_t addr)
 
 void RTekI(void){
      uint8_t tmp[TEKI_BYTES] = {0};
-     uint8_t CmdDataRead = 0x03;
-     uint8_t adrArr[3];
+     /*uint8_t CmdDataRead = 0x03;
+     uint8_t adrArr[3];*/
 
-     adrArr[0] = (ADR_TEKI >> 16) & 0xFF;
+     Flash_Read(ADR_TEKI, tmp, sizeof(tmp));
+
+     /*adrArr[0] = (ADR_TEKI >> 16) & 0xFF;
      adrArr[1] = (ADR_TEKI >>  8) & 0xFF;
      adrArr[2] = (ADR_TEKI      ) & 0xFF;
 
@@ -179,7 +197,7 @@ void RTekI(void){
      HAL_SPI_Transmit(&hspi1,&CmdDataRead,1,100);
      HAL_SPI_Transmit(&hspi1,adrArr,3,100);
      HAL_SPI_Receive(&hspi1,tmp,TEKI_BYTES,100);
-     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);
+     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,GPIO_PIN_SET);*/
 
 	 for (int i=0;i<765;i++) ZnTekI[i+1] = tmp[i];
 
@@ -254,7 +272,8 @@ void RTekI(void){
 /*Запись текущих данных из массивов ZnTekI[ZnTekIc] в файл TekInf.txt*/
  void WTekI(void){
      // Стираем сектор с TekInf
-     flash_erase_sector(ADR_TEKI & ~(FLASH_SECTOR_SIZE - 1));
+	 Sector4KB_Erase(ADR_TEKI);
+     //flash_erase_sector(ADR_TEKI & ~(FLASH_SECTOR_SIZE - 1));
 
      // Готовим буфер 771 байт
      uint8_t tmp[TEKI_BYTES] = {0};
@@ -266,7 +285,8 @@ void RTekI(void){
      tmp[769] = (uint8_t)(adrArxR >> 8);
      tmp[770] = (uint8_t)(adrArxR);
 
-     flash_write(ADR_TEKI, tmp, sizeof(tmp));
+     Flash_PageProgram(ADR_TEKI, tmp, sizeof(tmp));
+     //RTekI();
  }
 
 /*==============================================*/

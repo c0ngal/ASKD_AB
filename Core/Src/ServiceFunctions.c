@@ -176,27 +176,35 @@ L1:   ZnTekI[300] =  PrSab;
  void YstDate(){
 
     //regs:  registers;
-
-    a = ZnX[2];
+	int index = 2;
+	while (ZnX[index] != 'D') ++index;
+	++index;
+    //a = ZnX[2];
+	a = ZnX[index++];
     a = a & 0x0F;
 //    a = a << 4;
-    c = ZnX[3];
+    //c = ZnX[3];
+    c = ZnX[index++];
     c = c & 0x0F;
     dd = a*10 + c; //a | c;
     //send (0x07) для dd
 
-    a = ZnX[4];
+    //a = ZnX[4];
+    a = ZnX[index++];
     a = a & 0x0F;
     //a = a << 4;
-    c = ZnX[5];
+    //c = ZnX[5];
+    c = ZnX[index++];
     c = c & 0x0F;
     dm = a*10 + c; //a | c;
     //send (0x09) для dm
 
-    a = ZnX[6];
+    //a = ZnX[6];
+    a = ZnX[index++];
     a = a & 0x0F;
     //a = a << 4;
-    c = ZnX[7];
+    //c = ZnX[7];
+    c = ZnX[index++];
     c = c & 0x0F;
     dg = a*10 + c; //a | c;
     //send (0x0D) для dg
@@ -206,18 +214,25 @@ L1:   ZnTekI[300] =  PrSab;
 /* Установка времени в часах RTC*/
  void YstTime(){
 
-    a = ZnX[8];
+	int index = 2;
+	while (ZnX[index] != 'D') ++index;
+	index += 7;
+    //a = ZnX[8];
+	a = ZnX[index++];
     a = a & 0x0F;
     //a = a << 4;
-    c = ZnX[9];
+    //c = ZnX[9];
+    c = ZnX[index++];
     c = c & 0x0F;
     tch = a*10 + c; //a | c;
     //send (0x05) для tch
 
-    a = ZnX[10];
+    //a = ZnX[10];
+    a = ZnX[index++];
     a = a & 0x0F;
     //a = a << 4;
-    c = ZnX[11];
+    //c = ZnX[11];
+    c = ZnX[index++];
     c = c & 0x0F;
     tm = a*10 + c; //a | c;
     //send (0x05) для tm

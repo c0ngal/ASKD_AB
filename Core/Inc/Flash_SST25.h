@@ -69,5 +69,6 @@ struct tConfFile ReadConfFile(void);		//������ �������
 struct tCanalFile ReadCanalFile(void);		//������ ���������� ������� �� flash ������
 struct tLCTable ReadLCTable(uint8_t, uint16_t);		//������ ���������� L � C �� flash ������
 void WriteLCTable(uint8_t,uint16_t,struct tLCTable);		//������ ���������� L � C �� flash ������
-
+void Flash_Read(uint32_t addr, uint8_t *data, uint16_t len);
+void Flash_PageProgram(uint32_t addr, uint8_t *data, uint16_t len);
 #endif //__FLASH_SST25_H__

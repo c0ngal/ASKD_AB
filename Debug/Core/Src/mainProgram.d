@@ -31,7 +31,8 @@ Core/Src/mainProgram.o: ../Core/Src/mainProgram.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/UNIO.h ../Core/Inc/ADC.h
+ ../Core/Inc/UNIO.h ../Core/Inc/ADC.h ../Core/Inc/flash_ext.h \
+ ../Core/Inc/Flash_SSt25.h
 ../Core/Inc/mainProgram.h:
 ../Core/Inc/global.h:
 ../Core/Inc/MemoryFunctions.h:
@@ -69,3 +70,5 @@ Core/Src/mainProgram.o: ../Core/Src/mainProgram.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/UNIO.h:
 ../Core/Inc/ADC.h:
+../Core/Inc/flash_ext.h:
+../Core/Inc/Flash_SSt25.h:

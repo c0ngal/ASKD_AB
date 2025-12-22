@@ -30,7 +30,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/UART.h ../Core/Inc/UNIO.h ../Core/Inc/Flash_SSt25.h \
  ../Core/Inc/global.h ../Core/Inc/delay.h ../Core/Inc/mainProgram.h \
- ../Core/Inc/ServiceFunctions.h
+ ../Core/Inc/ServiceFunctions.h ../Core/Inc/flash_ext.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -68,3 +68,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/delay.h:
 ../Core/Inc/mainProgram.h:
 ../Core/Inc/ServiceFunctions.h:
+../Core/Inc/flash_ext.h:

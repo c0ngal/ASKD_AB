@@ -6,6 +6,10 @@
 #include "UNIO.h"
 #include "ADC.h"
 #include <ctype.h>
+#include <string.h>
+#include "stm32f4xx_hal.h"
+#include "flash_ext.h"
+#include "Flash_SSt25.h"
 
  uint8_t Rbyte;
  uint8_t ssVixA3;
@@ -1768,15 +1772,22 @@ L73:
 /* do{ //TODO1
         //c = (Lo(portw[AdrRY + 2] & RxD));
     }while(c > 0);*/
+	memset(ZnX, '0', 129);
 		ZnX[1] = GetByte(AdrRY);
 		i = 2;
 L74:  Rbyte = GetByte(AdrRY);
      ZnX[i] =  Rbyte;
      i++;
   if (Rbyte != KT) goto L74;
+  /*while (1) {
+	  Rbyte = GetByte(AdrRY);
+	  if (Rbyte == KT) break;
+	  ++i;
+  }*/
 
-  while (!isalpha(ZnX[i])) --i;
-  d =  ZnX[i];
+  int j = i - 1;
+  while (j > 0 && !isalpha(ZnX[j])) --j;
+  d =  ZnX[j];
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/
@@ -1820,9 +1831,11 @@ L74:  Rbyte = GetByte(AdrRY);
   case 0x54 : goto L30; //break;/*T - обнуление времени замкнутости ДД*/
   case 0x59 : goto L39; //break;/*Y - вывод последнего № съема инф-ции рабочего режима*/
   case 0x43 :
+
         PrAA = 1;
 	sendDebug("Cmd C");
-        goto L72;/*C - запрос на однократное обновление информации на экране из файла TekInf.txt */
+	goto L72;
+      //  goto L72;/*C - запрос на однократное обновление информации на экране из файла TekInf.txt */
         //break;
   case 0x42 : /*B - стирание раб. архива и № := 0 */
 
@@ -2457,11 +2470,12 @@ L28:  Riz();
      goto L37;
 
 L23: ZapZN();
-    WTekI();
+    //WTekI();
     //RTekI();
     FZavN();
 
     for(i=1;i<=12;i++) SendByte(AdrRY,ZnS[i]);
+
     goto L37;
 
 L24:  //RTekI();
@@ -2476,7 +2490,9 @@ L26:  ZapDI();
      FDIzg();
 
      for(i=1;i<=15;i++) SendByte(AdrRY,ZnS[i]);
+     RTekI();
      goto L37;
+
 
 L29:  ChtArx();
 

@@ -29,7 +29,7 @@ Core/Src/MemoryFunctions.o: ../Core/Src/MemoryFunctions.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/flash_ext.h
+ ../Core/Inc/flash_ext.h ../Core/Inc/Flash_SSt25.h ../Core/Inc/global.h
 ../Core/Inc/global.h:
 ../Core/Inc/MemoryFunctions.h:
 ../Core/Inc/UART.h:
@@ -63,3 +63,5 @@ Core/Src/MemoryFunctions.o: ../Core/Src/MemoryFunctions.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/flash_ext.h:
+../Core/Inc/Flash_SSt25.h:
+../Core/Inc/global.h:
