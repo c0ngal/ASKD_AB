@@ -300,7 +300,8 @@ void RTekI(void){
      }
 
      // Запись 256 байт (Pascal: 1..255)
-     flash_write(addr, &ZnArxI[1], 255);
+     //flash_write(addr, &ZnArxI[1], 255);
+     Flash_PageProgram(addr, &ZnArxI[1], 255);
 
      // сдвиг адреса/переполнение
      adrArxI++;

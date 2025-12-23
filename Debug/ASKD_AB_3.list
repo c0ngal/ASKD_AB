@@ -1451,12 +1451,12 @@ float ADC0(){   //TODO
 		return -1;
  80010fc:	4b14      	ldr	r3, [pc, #80]	@ (8001150 <ADC0+0x130>)
  80010fe:	e018      	b.n	8001132 <ADC0+0x112>
-	res -= 2009;//1857;//1820;	//смещение ноля 2045
+	res -= 1980;//1857;//1820;	//смещение ноля 2045
  8001100:	edd7 7a01 	vldr	s15, [r7, #4]
  8001104:	ed9f 7a13 	vldr	s14, [pc, #76]	@ 8001154 <ADC0+0x134>
  8001108:	ee77 7ac7 	vsub.f32	s15, s15, s14
  800110c:	edc7 7a01 	vstr	s15, [r7, #4]
-	res = res * 0.00522;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
+	res = res * 0.00485;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
  8001110:	6878      	ldr	r0, [r7, #4]
  8001112:	f7ff fa19 	bl	8000548 <__aeabi_f2d>
  8001116:	a30a      	add	r3, pc, #40	@ (adr r3, 8001140 <ADC0+0x120>)
@@ -1469,6 +1469,7 @@ float ADC0(){   //TODO
  8001128:	f7ff fd5e 	bl	8000be8 <__aeabi_d2f>
  800112c:	4603      	mov	r3, r0
  800112e:	607b      	str	r3, [r7, #4]
+	//0.00522
  	return res;
  8001130:	687b      	ldr	r3, [r7, #4]
 //   delay(2);
@@ -1482,12 +1483,12 @@ float ADC0(){   //TODO
  800113a:	3708      	adds	r7, #8
  800113c:	46bd      	mov	sp, r7
  800113e:	bd80      	pop	{r7, pc}
- 8001140:	148fd9fd 	.word	0x148fd9fd
- 8001144:	3f756191 	.word	0x3f756191
+ 8001140:	f62b6ae8 	.word	0xf62b6ae8
+ 8001144:	3f73dd97 	.word	0x3f73dd97
  8001148:	44c0c000 	.word	0x44c0c000
  800114c:	20000636 	.word	0x20000636
  8001150:	bf800000 	.word	0xbf800000
- 8001154:	44fb2000 	.word	0x44fb2000
+ 8001154:	44f78000 	.word	0x44f78000
 
 08001158 <Read_ADC1>:
 //========================================================
@@ -3084,11 +3085,12 @@ void RTekI(void){
      }
 
      // Запись 256 байт (Pascal: 1..255)
-     flash_write(addr, &ZnArxI[1], 255);
+     //flash_write(addr, &ZnArxI[1], 255);
+     Flash_PageProgram(addr, &ZnArxI[1], 255);
  8001cd0:	22ff      	movs	r2, #255	@ 0xff
  8001cd2:	4910      	ldr	r1, [pc, #64]	@ (8001d14 <ZapArx+0x70>)
  8001cd4:	6878      	ldr	r0, [r7, #4]
- 8001cd6:	f002 fee6 	bl	8004aa6 <flash_write>
+ 8001cd6:	f7ff fc5b 	bl	8001590 <Flash_PageProgram>
 
      // сдвиг адреса/переполнение
      adrArxI++;
@@ -11099,17 +11101,17 @@ void mainProgram(){
  800531e:	66da      	str	r2, [r3, #108]	@ 0x6c
   //TODO1
   //port[AdAK] = 0x3A;/*26 вход АК:"+5 В Контр."  */
-		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
- 8005320:	2100      	movs	r1, #0
+		 setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,0);setUNIO(29,0);setUNIO(28,1);
+ 8005320:	2101      	movs	r1, #1
  8005322:	201b      	movs	r0, #27
  8005324:	f7ff f94a 	bl	80045bc <setUNIO>
- 8005328:	2101      	movs	r1, #1
+ 8005328:	2100      	movs	r1, #0
  800532a:	201a      	movs	r0, #26
  800532c:	f7ff f946 	bl	80045bc <setUNIO>
- 8005330:	2100      	movs	r1, #0
+ 8005330:	2101      	movs	r1, #1
  8005332:	2019      	movs	r0, #25
  8005334:	f7ff f942 	bl	80045bc <setUNIO>
- 8005338:	2101      	movs	r1, #1
+ 8005338:	2100      	movs	r1, #0
  800533a:	2018      	movs	r0, #24
  800533c:	f7ff f93e 	bl	80045bc <setUNIO>
  8005340:	2100      	movs	r1, #0

@@ -8,10 +8,10 @@
 ../Core/Src/MemoryFunctions.c:212:7:ChtArx	16	static
 ../Core/Src/MemoryFunctions.c:273:7:WTekI	784	static
 ../Core/Src/MemoryFunctions.c:293:7:ZapArx	16	static
-../Core/Src/MemoryFunctions.c:346:14:read_record	280	static
-../Core/Src/MemoryFunctions.c:366:7:ChtRArx	24	static
-../Core/Src/MemoryFunctions.c:411:7:ZapRArx	24	static
-../Core/Src/MemoryFunctions.c:469:7:EraseRabArx	8	static
-../Core/Src/MemoryFunctions.c:480:7:EraseArx	8	static
-../Core/Src/MemoryFunctions.c:489:7:EraseTekI	8	static
-../Core/Src/MemoryFunctions.c:493:7:InitMemory	8	static
+../Core/Src/MemoryFunctions.c:347:14:read_record	280	static
+../Core/Src/MemoryFunctions.c:367:7:ChtRArx	24	static
+../Core/Src/MemoryFunctions.c:412:7:ZapRArx	24	static
+../Core/Src/MemoryFunctions.c:470:7:EraseRabArx	8	static
+../Core/Src/MemoryFunctions.c:481:7:EraseArx	8	static
+../Core/Src/MemoryFunctions.c:490:7:EraseTekI	8	static
+../Core/Src/MemoryFunctions.c:494:7:InitMemory	8	static

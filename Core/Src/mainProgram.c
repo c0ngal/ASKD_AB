@@ -248,7 +248,7 @@ void mainProgram(){
   ZnU[27] = 0;
   //TODO1
   //port[AdAK] = 0x3A;/*26 вход АК:"+5 В Контр."  */
-		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
+		 setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,0);setUNIO(29,0);setUNIO(28,1);
   delay_ms(50);
 
   izmZn = ADC0();	//TODO1
