@@ -1788,6 +1788,9 @@ L74:  Rbyte = GetByte(AdrRY);
   int j = i - 1;
   while (j > 0 && !isalpha(ZnX[j])) --j;
   d =  ZnX[j];
+  for (int i = 0; i < 256; ++i) ZnArxI[i] = i;
+
+  ZapRArx();
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/

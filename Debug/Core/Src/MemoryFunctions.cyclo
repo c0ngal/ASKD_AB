@@ -8,10 +8,10 @@
 ../Core/Src/MemoryFunctions.c:212:7:ChtArx	7
 ../Core/Src/MemoryFunctions.c:273:7:WTekI	2
 ../Core/Src/MemoryFunctions.c:293:7:ZapArx	3
-../Core/Src/MemoryFunctions.c:347:14:read_record	2
-../Core/Src/MemoryFunctions.c:367:7:ChtRArx	5
-../Core/Src/MemoryFunctions.c:412:7:ZapRArx	3
-../Core/Src/MemoryFunctions.c:470:7:EraseRabArx	1
-../Core/Src/MemoryFunctions.c:481:7:EraseArx	1
-../Core/Src/MemoryFunctions.c:490:7:EraseTekI	1
-../Core/Src/MemoryFunctions.c:494:7:InitMemory	5
+../Core/Src/MemoryFunctions.c:348:14:read_record	2
+../Core/Src/MemoryFunctions.c:368:7:ChtRArx	4
+../Core/Src/MemoryFunctions.c:416:7:ZapRArx	3
+../Core/Src/MemoryFunctions.c:477:7:EraseRabArx	1
+../Core/Src/MemoryFunctions.c:492:7:EraseArx	1
+../Core/Src/MemoryFunctions.c:504:7:EraseTekI	1
+../Core/Src/MemoryFunctions.c:509:7:InitMemory	5

@@ -7,8 +7,10 @@ static uint16_t s_cs_pin = 0;
 
 extern SPI_HandleTypeDef hspi1;
 
-static inline void CS_L(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_RESET); }
-static inline void CS_H(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_SET); }
+//static inline void CS_L(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_RESET); }
+//static inline void CS_H(void){ HAL_GPIO_WritePin(s_cs_port, s_cs_pin, GPIO_PIN_SET); }
+#define CS_L()  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)
+#define CS_H() HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)
 
 static HAL_StatusTypeDef txrx(const uint8_t *tx, uint8_t *rx, size_t n){
     return HAL_SPI_TransmitReceive(s_hspi, (uint8_t*)tx, rx, n, FLASH_TIMEOUT_MS);

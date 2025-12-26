@@ -342,6 +342,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  uint8_t rec[255];
+	  for (uint32_t i = 0; i < 255; ++i) ZnArxI[i] = i;
+	  fMemoryArxROverWrite = 0;
+	  /*Sector4KB_Erase(0x0);
+ 	Flash_PageProgram(0x0, ZnArxI, 255);
+ 	Flash_Read(0x0, rec, 255);*/
+	  //Sector4KB_Erase(addr);
+ 	HAL_Delay(1000);
+    	  ZapRArx();
+	  ChtRArx();
+	  //посмотреть на тот ли адрес записывается TODO
 	  //пgоверить флешку через read_id
 	  //write void SaveCanal(struct tCanalFile FileCanal)
 	  /*int i=0,j=0;
@@ -597,9 +608,9 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x10;
-  sTime.Minutes = 0x13;
-  sTime.Seconds = 0x0;
+  sTime.Hours = 0x13;
+  sTime.Minutes = 0x7;
+  sTime.Seconds = 0x30;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
   if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
@@ -608,7 +619,7 @@ static void MX_RTC_Init(void)
   }
   sDate.WeekDay = RTC_WEEKDAY_MONDAY;
   sDate.Month = RTC_MONTH_DECEMBER;
-  sDate.Date = 0x15;
+  sDate.Date = 0x26;
   sDate.Year = 0x25;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)

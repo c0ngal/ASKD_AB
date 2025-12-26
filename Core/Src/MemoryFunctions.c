@@ -296,7 +296,8 @@ void RTekI(void){
      uint32_t addr = ADR_ARXI + (uint32_t)adrArxI * RECORD_SIZE;
 
      if ((addr % FLASH_SECTOR_SIZE) == 0){
-         flash_erase_sector(addr);
+         //flash_erase_sector(addr);
+    	 Sector4KB_Erase(addr);
      }
 
      // Запись 256 байт (Pascal: 1..255)
@@ -369,7 +370,10 @@ void RTekI(void){
          uint32_t start = ((adrArxR / 1024) + 1) * 1024;
          for (uint32_t i = start; i < 4*1024; ++i) read_record(ADR_ARXR, i);
      }
-     for (uint32_t i = 0; i < adrArxR; ++i) read_record(ADR_ARXR, i);
+     //read_record(ADR_ARXR, 0);
+     read_record(ADR_ARXR, adrArxR - 1);
+     //for (uint32_t i = 0; i < adrArxR; ++i) read_record(ADR_ARXR, i);
+     //for (uint32_t i = 0; i < adrArxR; ++i) read_record(0x0, i);
 
      for (int k=0;k<255;k++) SendByte(AdrRY, 0x23);
      SendByte(AdrRY, KT);
@@ -411,14 +415,17 @@ void RTekI(void){
 /*==============================================*/
  void ZapRArx(void){
      ZnArxI[255] = 0x0A;
-
      uint32_t addr = ADR_ARXR + (uint32_t)adrArxR * RECORD_SIZE;
-
+	 //Sector4KB_Erase(addr);
      if ((addr % FLASH_SECTOR_SIZE) == 0){
-         flash_erase_sector(addr);
+
+         //flash_erase_sector(addr);
+    	 Sector4KB_Erase(addr);
      }
 
-     flash_write(addr, &ZnArxI[1], 255);
+     //flash_write(addr, &ZnArxI[1], 255);
+     Flash_PageProgram(addr, ZnArxI, 255);
+     //Flash_PageProgram(0x0, &ZnArxI[1], 255);
 
      adrArxR++;
      if (adrArxR >= 4*1024){
@@ -472,23 +479,31 @@ void RTekI(void){
      ZnTekI[755] = ZnTekI[756] = ZnTekI[757] = ZnTekI[758] = 0x20;
      ZnTekI[759] = '0';
      // 4 сектора
-     flash_erase_sector(ADR_ARXR + 0*FLASH_SECTOR_SIZE);
+     /*flash_erase_sector(ADR_ARXR + 0*FLASH_SECTOR_SIZE);
      flash_erase_sector(ADR_ARXR + 1*FLASH_SECTOR_SIZE);
      flash_erase_sector(ADR_ARXR + 2*FLASH_SECTOR_SIZE);
-     flash_erase_sector(ADR_ARXR + 3*FLASH_SECTOR_SIZE);
+     flash_erase_sector(ADR_ARXR + 3*FLASH_SECTOR_SIZE);*/
+     Sector4KB_Erase(ADR_ARXR + 0*FLASH_SECTOR_SIZE);
+     Sector4KB_Erase(ADR_ARXR + 1*FLASH_SECTOR_SIZE);
+     Sector4KB_Erase(ADR_ARXR + 2*FLASH_SECTOR_SIZE);
+     Sector4KB_Erase(ADR_ARXR + 3*FLASH_SECTOR_SIZE);
  }
 
  void EraseArx(void){
      // 3 сектора (испытания)
-     flash_erase_sector(ADR_ARXI + 0*FLASH_SECTOR_SIZE);
+     /*flash_erase_sector(ADR_ARXI + 0*FLASH_SECTOR_SIZE);
      flash_erase_sector(ADR_ARXI + 1*FLASH_SECTOR_SIZE);
-     flash_erase_sector(ADR_ARXI + 2*FLASH_SECTOR_SIZE);
+     flash_erase_sector(ADR_ARXI + 2*FLASH_SECTOR_SIZE);*/
+	 Sector4KB_Erase(ADR_ARXI + 0*FLASH_SECTOR_SIZE);
+	 Sector4KB_Erase(ADR_ARXI + 1*FLASH_SECTOR_SIZE);
+	 Sector4KB_Erase(ADR_ARXI + 2*FLASH_SECTOR_SIZE);
      fMemoryArxIOverWrite = 0;
      adrArxI = 0;
  }
 
  void EraseTekI(void){
-     flash_erase_sector(ADR_TEKI & ~(FLASH_SECTOR_SIZE-1));
+     //flash_erase_sector(ADR_TEKI & ~(FLASH_SECTOR_SIZE-1));
+	 Sector4KB_Erase(ADR_TEKI & ~(FLASH_SECTOR_SIZE-1));
  }
 
  void InitMemory(void){
