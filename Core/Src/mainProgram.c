@@ -2594,7 +2594,7 @@ L37:   /*Анализ признака РАБОТЫ с ПЭВМ*/
      if (ZnTekI[399] == 0x30) goto L1;
      else goto L73;
 
-L38:  //ZapRArx();
+L38: ZapRArx();
 	 ChtRArx();
      goto L37;
 
