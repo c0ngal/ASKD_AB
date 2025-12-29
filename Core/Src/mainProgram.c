@@ -1776,8 +1776,10 @@ L73:
 		ZnX[1] = GetByte(AdrRY);
 		i = 2;
 L74:  Rbyte = GetByte(AdrRY);
-     ZnX[i] =  Rbyte;
-     i++;
+	 if (Rbyte != 0){
+		 ZnX[i] =  Rbyte;
+		 i++;
+	 }
   if (Rbyte != KT) goto L74;
   /*while (1) {
 	  Rbyte = GetByte(AdrRY);
@@ -1788,9 +1790,7 @@ L74:  Rbyte = GetByte(AdrRY);
   int j = i - 1;
   while (j > 0 && !isalpha(ZnX[j])) --j;
   d =  ZnX[j];
-  for (int i = 0; i < 256; ++i) ZnArxI[i] = i;
 
-  ZapRArx();
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/
@@ -2045,7 +2045,7 @@ L72:
  /*Проверка ИСПРАВНОСТИ */
      ZnU[27] =  0;
      //port[AdAK] = 0x3A;
-		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
+		 setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,0);setUNIO(29,0);setUNIO(28,1);
      delay_ms(500);
      izmZn = ADC0();
      ZnU[27] = izmZn;	//TODO!!! не работает 2ая МК АК => не мерим 5В контр
@@ -2497,7 +2497,8 @@ L26:  ZapDI();
      goto L37;
 
 
-L29:  ChtArx();
+L29: //ZapArx();
+     ChtArx();
 
      goto L37;
 
@@ -2507,7 +2508,7 @@ L31:  //WTekI();
       else{
           NomZapArx();
 //				delay_ms(200);
-          ZapArx();
+          ZapArx();//ZapRArx();
 
 				WTekI();
 							sendDebug("WTelIEnd");
@@ -2593,7 +2594,8 @@ L37:   /*Анализ признака РАБОТЫ с ПЭВМ*/
      if (ZnTekI[399] == 0x30) goto L1;
      else goto L73;
 
-L38:  ChtRArx();
+L38:  //ZapRArx();
+	 ChtRArx();
      goto L37;
 
 L39: // NomRArx();

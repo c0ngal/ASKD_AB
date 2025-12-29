@@ -32,6 +32,8 @@
 #include "ServiceFunctions.h"
 #include "stm32f4xx_hal.h"
 #include "flash_ext.h"
+#include "MemoryFunctions.h"
+
 //extern struct tLCTableFile;
 //extern void Chip_Erase(void);
 
@@ -335,23 +337,24 @@ int main(void)
 //прочитать память (была уже готовая функция)
 
 
-
+EraseRabArx();
+WTekI();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  uint8_t rec[255];
-	  for (uint32_t i = 0; i < 255; ++i) ZnArxI[i] = i;
-	  fMemoryArxROverWrite = 0;
+	  //uint8_t rec[255];
+	  //for (uint32_t i = 0; i < 255; ++i) ZnArxI[i] = i;
+	  //fMemoryArxROverWrite = 0;
 	  /*Sector4KB_Erase(0x0);
  	Flash_PageProgram(0x0, ZnArxI, 255);
  	Flash_Read(0x0, rec, 255);*/
 	  //Sector4KB_Erase(addr);
- 	HAL_Delay(1000);
-    	  ZapRArx();
-	  ChtRArx();
+ 	//HAL_Delay(1000);
+    //	  ZapRArx();
+	  //ChtRArx();
 	  //посмотреть на тот ли адрес записывается TODO
 	  //пgоверить флешку через read_id
 	  //write void SaveCanal(struct tCanalFile FileCanal)

@@ -91,12 +91,18 @@ extern const uint8_t KT; //конец передачи текста
 
 void RdArxByte1636RR4(uint32_t addr)
 {
-    (void)addr;
+    /*(void)addr;
      // ВРЕМЕННО: забиваем буфер нулями
     for (int i = 0; i < 256; ++i) {
         ZnArxI[i] = 0;
-    }
+    }*/
+
+
+    Flash_Read(addr, ZnArxI, 255);
+    for (int k = 0; k < 255; ++k) SendByte(AdrRY, ZnArxI[k]); // pascal
+    SendByte(AdrRY, KT);
 }
+
   /*Запись заводского номера в ZnTekI(ZnTekIс) при вводе*/
  void ZapZN(){
   uint16_t r = 2;
@@ -366,13 +372,14 @@ void RTekI(void){
  */
 
  void ChtRArx(void){ // рабочий
+	 //fMemoryArxROverWrite = 0;
      if (fMemoryArxROverWrite){
          uint32_t start = ((adrArxR / 1024) + 1) * 1024;
          for (uint32_t i = start; i < 4*1024; ++i) read_record(ADR_ARXR, i);
      }
      //read_record(ADR_ARXR, 0);
-     read_record(ADR_ARXR, adrArxR - 1);
-     //for (uint32_t i = 0; i < adrArxR; ++i) read_record(ADR_ARXR, i);
+     //read_record(ADR_ARXR, adrArxR - 1);
+     for (uint32_t i = 0; i < adrArxR; ++i) read_record(ADR_ARXR, i);
      //for (uint32_t i = 0; i < adrArxR; ++i) read_record(0x0, i);
 
      for (int k=0;k<255;k++) SendByte(AdrRY, 0x23);
