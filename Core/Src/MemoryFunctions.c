@@ -98,9 +98,9 @@ void RdArxByte1636RR4(uint32_t addr)
     }*/
 
 
-    Flash_Read(addr, ZnArxI, 255);
-    for (int k = 0; k < 255; ++k) SendByte(AdrRY, ZnArxI[k]); // pascal
-    SendByte(AdrRY, KT);
+    Flash_Read(addr, &ZnArxI[1], 255);
+    //for (int k = 0; k < 255; ++k) SendByte(AdrRY, ZnArxI[k]); // pascal
+    //SendByte(AdrRY, KT);
 }
 
   /*Запись заводского номера в ZnTekI(ZnTekIс) при вводе*/
@@ -222,21 +222,29 @@ void RTekI(void){
 		 for (;(i<1024*3);i++){	//считываем данные с последующих секторов (до 5 невключительно)
 			 RdArxByte1636RR4(i*256 + 0x040000);	//адрес = номер записи * кол-во байт в записи (на самом деле не 1 меньше) + 0x040000, так как записываем начиная со 2ого сектора
 			 //посылка
-			 for(k=0;k<255;k++)
+
+
+			 for(k=0;k<255;k++) {
+				 //SendByte(AdrRY, 0x33);
 					SendByte(AdrRY,ZnArxI[k+1]);	//формат pascal
+
+			 }
 			 SendByte(AdrRY,0x03);
 		 }
 	 }
 	 for (i=0;i<adrArxI;i++){	//от 0 до текущего номера
 			 RdArxByte1636RR4(i*256 + 0x040000);	//адрес = адрес второго сектора + номер записи * кол-во байт в записи (на самом деле на 1 меньше)
 			 //посылка
-			 for(k=0;k<255;k++)
-  			 SendByte(AdrRY,ZnArxI[k+1]);//формат pascal
+
+			 for(k=0;k<255;k++) {
+				 SendByte(AdrRY,ZnArxI[k+1]);//формат pascal
+				 //SendByte(AdrRY, 0x33);
+			 }
 			 SendByte(AdrRY,KT);
 	 }
 	 for(k=0;k<255;k++)
-			SendByte(AdrRY,0x23);
-	 SendByte(AdrRY,KT);	 
+		SendByte(AdrRY,0x23);
+	 SendByte(AdrRY,KT);
 	 
   //Assign(FArxI,'Archive.dat');/*связывает имя внешнего файла с файловой переменной*/
 
@@ -371,11 +379,15 @@ void RTekI(void){
  }
  */
 
- void ChtRArx(void){ // рабочий
+ /*void ChtRArx(void){ // рабочий
 	 //fMemoryArxROverWrite = 0;
      if (fMemoryArxROverWrite){
          uint32_t start = ((adrArxR / 1024) + 1) * 1024;
          for (uint32_t i = start; i < 4*1024; ++i) read_record(ADR_ARXR, i);
+     }
+
+     if (fMemoryArxROverWrite){
+         for (uint32_t i = adrArxR; i < 4*1024; ++i) read_record(ADR_ARXR, i);
      }
      //read_record(ADR_ARXR, 0);
      //read_record(ADR_ARXR, adrArxR - 1);
@@ -384,6 +396,47 @@ void RTekI(void){
 
      for (int k=0;k<255;k++) SendByte(AdrRY, 0x23);
      SendByte(AdrRY, KT);
+ }*/
+
+
+
+
+ static void RdArxByte_New(uint32_t adr)
+ {
+     Flash_Read(adr, &ZnArxI[1], 255);
+
+ }
+
+ void ChtRArx(void)
+ {
+     int i=0,k=0;
+
+     if (fMemoryArxROverWrite){
+         i = ((adrArxR / 1024) + 1) * 1024;
+         for (; i < 1024*4; i++){
+             RdArxByte_New(ADR_ARXR + i*256);
+
+             for (k=0; k<255; k++)
+                 SendByte(AdrRY, ZnArxI[k+1]); // как в старом
+
+             SendByte(AdrRY, 0x03); // KT
+         }
+     }
+
+     for (i=0; i<adrArxR; i++){
+         RdArxByte_New(ADR_ARXR + i*256);
+
+         for (k=0; k<255; k++)
+             SendByte(AdrRY, ZnArxI[k+1]);
+
+
+         SendByte(AdrRY, 0x03); // KT
+     }
+
+     for (k=0; k<255; k++)
+         SendByte(AdrRY, 0x23);
+
+     SendByte(AdrRY, 0x03); // KT
  }
 
 	 
@@ -424,14 +477,21 @@ void RTekI(void){
      ZnArxI[255] = 0x0A;
      uint32_t addr = ADR_ARXR + (uint32_t)adrArxR * RECORD_SIZE;
 	 //Sector4KB_Erase(addr);
-     if ((addr % FLASH_SECTOR_SIZE) == 0){
+     /*if ((addr % FLASH_SECTOR_SIZE) == 0){
 
          //flash_erase_sector(addr);
     	 Sector4KB_Erase(addr);
+     }*/
+
+
+     if ((adrArxR % (FLASH_SECTOR_SIZE / RECORD_SIZE)) == 0) {
+         uint32_t sector_addr = ADR_ARXR + (uint32_t)adrArxR * RECORD_SIZE;
+         sector_addr &= ~(FLASH_SECTOR_SIZE - 1); // выровнять на 4KB
+         Sector4KB_Erase(sector_addr);
      }
 
      //flash_write(addr, &ZnArxI[1], 255);
-     Flash_PageProgram(addr, ZnArxI, 255);
+     Flash_PageProgram(addr, &ZnArxI[1], 255);
      //Flash_PageProgram(0x0, &ZnArxI[1], 255);
 
      adrArxR++;
@@ -490,10 +550,14 @@ void RTekI(void){
      flash_erase_sector(ADR_ARXR + 1*FLASH_SECTOR_SIZE);
      flash_erase_sector(ADR_ARXR + 2*FLASH_SECTOR_SIZE);
      flash_erase_sector(ADR_ARXR + 3*FLASH_SECTOR_SIZE);*/
-     Sector4KB_Erase(ADR_ARXR + 0*FLASH_SECTOR_SIZE);
+     /*Sector4KB_Erase(ADR_ARXR + 0*FLASH_SECTOR_SIZE);
      Sector4KB_Erase(ADR_ARXR + 1*FLASH_SECTOR_SIZE);
      Sector4KB_Erase(ADR_ARXR + 2*FLASH_SECTOR_SIZE);
-     Sector4KB_Erase(ADR_ARXR + 3*FLASH_SECTOR_SIZE);
+     Sector4KB_Erase(ADR_ARXR + 3*FLASH_SECTOR_SIZE);*/
+
+     for (uint32_t a = ADR_ARXR; a < ADR_ARXR + 0x100000; a += FLASH_SECTOR_SIZE) {
+         Sector4KB_Erase(a);
+     }
  }
 
  void EraseArx(void){

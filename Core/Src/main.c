@@ -319,6 +319,7 @@ int main(void)
 //}
   //Flash_Test();
 
+
   RTekI();
   //izmU();
   //Uakb();
@@ -415,7 +416,6 @@ WTekI();
 	      ZnTekI[352] = 0.5;*/
 
 	  //DtDv();
-
 
 
 	  for (int i = 1; i <= 765; ++i) {

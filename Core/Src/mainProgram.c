@@ -1772,7 +1772,7 @@ L73:
 /* do{ //TODO1
         //c = (Lo(portw[AdrRY + 2] & RxD));
     }while(c > 0);*/
-	memset(ZnX, '0', 129);
+	//memset(ZnX, '0', 129);
 		ZnX[1] = GetByte(AdrRY);
 		i = 2;
 L74:  Rbyte = GetByte(AdrRY);
@@ -2594,7 +2594,7 @@ L37:   /*Анализ признака РАБОТЫ с ПЭВМ*/
      if (ZnTekI[399] == 0x30) goto L1;
      else goto L73;
 
-L38: ZapRArx();
+L38: //ZapRArx();
 	 ChtRArx();
      goto L37;
 
