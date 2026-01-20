@@ -1774,6 +1774,7 @@ L73:
     }while(c > 0);*/
 	//memset(ZnX, '0', 129);
 		ZnX[1] = GetByte(AdrRY);
+		if (ZnX[1] == 0) goto L73;
 		i = 2;
 L74:  Rbyte = GetByte(AdrRY);
 	 if (Rbyte != 0){
@@ -1790,6 +1791,7 @@ L74:  Rbyte = GetByte(AdrRY);
   int j = i - 1;
   while (j > 0 && !isalpha(ZnX[j])) --j;
   d =  ZnX[j];
+  d = ZnX[1];
 
   switch (d){
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
@@ -2528,7 +2530,7 @@ L36:
 		 ZnUTekI[1] = 0x99;ZnUTekI[2] = 0x99;ZnUTekI[3] = 0x99;ZnUTekI[4] = 0x99;
 
 //for(i=0;i<1;i++)SendByte(AdrRY,i+10);
-	HAL_Delay(4000);
+	//HAL_Delay(4000);
      for(i=1;i<=765;i++){ SendByte(AdrRY,ZnUTekI[i]);
 			 //delay_ms(1);
 		 }

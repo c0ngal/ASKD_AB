@@ -176,7 +176,7 @@ L1:   ZnTekI[300] =  PrSab;
  void YstDate(){
 
     //regs:  registers;
-	int index = 2;
+	int index = 1;
 	while (ZnX[index] != 'D') ++index;
 	++index;
     //a = ZnX[2];
@@ -214,7 +214,7 @@ L1:   ZnTekI[300] =  PrSab;
 /* Установка времени в часах RTC*/
  void YstTime(){
 
-	int index = 2;
+	int index = 1;
 	while (ZnX[index] != 'D') ++index;
 	index += 7;
     //a = ZnX[8];
@@ -989,7 +989,8 @@ L1:   ZnTekI[300] =  PrSab;
   float r;
 //  port[AdAK+3] =$00;/*установка разъема J8 (каналы 0...23) CPU188R на "передачу" для A,B,C1,С2*/
 //  port[AdAK]=$3D;/*адрес съема напряжения ДТЭ*/
-	setUNIO(27,1);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(31,0);setUNIO(30,1);
+	//setUNIO(27,1);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(31,0);setUNIO(30,1);
+	setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
   delay_ms(50);
   r = ADC0();
 	//r = 5.0; //TODO!!! отладка с неработающим АК1

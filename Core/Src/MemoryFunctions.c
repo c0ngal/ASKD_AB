@@ -105,7 +105,8 @@ void RdArxByte1636RR4(uint32_t addr)
 
   /*Запись заводского номера в ZnTekI(ZnTekIс) при вводе*/
  void ZapZN(){
-  uint16_t r = 2;
+  //uint16_t r = 2;
+	 uint16_t r = 1;
   int cr = r;
   while (ZnX[cr] != 'N') ++cr;
   int i = cr + 1;
@@ -132,7 +133,8 @@ void RdArxByte1636RR4(uint32_t addr)
 //========================================================
  //Запись даты изготовления в ZnTekI(ZnTekIс) при вводе
  void ZapDI(){
-  uint16_t r = 2;
+  //uint16_t r = 2;
+	 uint16_t r = 1;
   int cr = r;
   while (ZnX[cr] != 'W') ++cr;
   int i = cr + 1;

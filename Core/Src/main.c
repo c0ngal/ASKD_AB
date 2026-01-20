@@ -318,13 +318,14 @@ int main(void)
   //Flash_ReadID();
 //}
   //Flash_Test();
-
+  setDigitalOutSPI(0, 1);
 
   RTekI();
   //izmU();
   //Uakb();
 
   for (i=0;i<32;i++){	//инициализация платы вывода (чтобы при reset гасли не нужные лампочну, например при выходе из режима ТО)
+  	//setDigitalOutSPI(i,1);
   	//setDigitalOutSPI(i,1);
   	setDigitalOutSPI(i,0);
   }
