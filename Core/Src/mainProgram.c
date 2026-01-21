@@ -342,7 +342,7 @@ L2:                     /* опрос состояния АБ */
      ZnU[27] =  0;
 		 //TODO1
      //port[AdAK] = 0x3A;
-		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
+     	 setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,0);setUNIO(29,0);setUNIO(28,1);
      delay_ms(40);
      izmZn = ADC0();
      ZnU[27] = izmZn;	//TODO!!! не работает 2ая МК АК => не мерим 5В контр
@@ -1202,7 +1202,8 @@ L3:/*Проверка ИСПРАВНОСТИ */
      ZnU[27] =  0;
      //TODO1
      //port[AdAK] = 0x3A;
-		 setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
+		 //setUNIO(27,0);setUNIO(26,1);setUNIO(25,0);setUNIO(24,1);setUNIO(29,0);setUNIO(28,1);
+		 setUNIO(27,1);setUNIO(26,0);setUNIO(25,1);setUNIO(24,0);setUNIO(29,0);setUNIO(28,1);
      delay_ms(10);
      izmZn = ADC0();
 		 ZnU[27] = izmZn;	//TODO!!! не работает 2ая МК АК => не мерим 5В контр

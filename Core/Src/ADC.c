@@ -66,8 +66,8 @@ float Read_ADC1() { //TODO
 	}
 	if (res == -1)
 		return -1;
-	res -= 2045;//res -= 1610;	//смещение ноля
-	res = res * 0.0048828125;//res = res * .00367;//CMRU;/*CMRU = 0.00244 V*/
+	res -= 1985;//res -= 1610;	//смещение ноля 2045
+	res = res * 0.0048929;//res = res * .00367;//CMRU;/*CMRU = 0.00244 V*/0048828125
 	return res;
 //       a:byte;
 //   h,l,s,z:word;

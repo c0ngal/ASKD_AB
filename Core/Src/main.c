@@ -317,7 +317,8 @@ int main(void)
 //while (1) {
   //Flash_ReadID();
 //}
-  //Flash_Test();
+
+
   setDigitalOutSPI(0, 1);
 
   RTekI();
