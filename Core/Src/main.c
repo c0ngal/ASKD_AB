@@ -330,6 +330,8 @@ int main(void)
   	//setDigitalOutSPI(i,1);
   	setDigitalOutSPI(i,0);
   }
+
+
   	setDigitalOutSPI(24,0);
   	setDigitalOutSPI(26,0);
   setUNIO(29,1);

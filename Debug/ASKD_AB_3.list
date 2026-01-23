@@ -39,15 +39,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  0002408a  00000000  00000000  00027bc9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00014613  00000000  00000000  0004bc53  2**0
+ 18 .debug_line   0001460e  00000000  00000000  0004bc53  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000ce637  00000000  00000000  00060266  2**0
+ 19 .debug_str    000ce637  00000000  00000000  00060261  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0012e89d  2**0
+ 20 .comment      00000043  00000000  00000000  0012e898  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000502c  00000000  00000000  0012e8e0  2**2
+ 21 .debug_frame  0000502c  00000000  00000000  0012e8dc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000058  00000000  00000000  0013390c  2**0
+ 22 .debug_line_str 00000058  00000000  00000000  00133908  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1451,12 +1451,14 @@ float ADC0(){   //TODO
 		return -1;
  80010fc:	4b14      	ldr	r3, [pc, #80]	@ (8001150 <ADC0+0x130>)
  80010fe:	e018      	b.n	8001132 <ADC0+0x112>
-	res -= 1980;//1857;//1820;	//смещение ноля 2045
+	//res -= 1980;//1857;//1820;	//смещение ноля 2045
+	//res = res * 0.00485;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
+	res += 68;
  8001100:	edd7 7a01 	vldr	s15, [r7, #4]
  8001104:	ed9f 7a13 	vldr	s14, [pc, #76]	@ 8001154 <ADC0+0x134>
- 8001108:	ee77 7ac7 	vsub.f32	s15, s15, s14
+ 8001108:	ee77 7a87 	vadd.f32	s15, s15, s14
  800110c:	edc7 7a01 	vstr	s15, [r7, #4]
-	res = res * 0.00485;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
+	res *= 0.002436;
  8001110:	6878      	ldr	r0, [r7, #4]
  8001112:	f7ff fa19 	bl	8000548 <__aeabi_f2d>
  8001116:	a30a      	add	r3, pc, #40	@ (adr r3, 8001140 <ADC0+0x120>)
@@ -1483,12 +1485,12 @@ float ADC0(){   //TODO
  800113a:	3708      	adds	r7, #8
  800113c:	46bd      	mov	sp, r7
  800113e:	bd80      	pop	{r7, pc}
- 8001140:	f62b6ae8 	.word	0xf62b6ae8
- 8001144:	3f73dd97 	.word	0x3f73dd97
+ 8001140:	8aa8650e 	.word	0x8aa8650e
+ 8001144:	3f63f4a9 	.word	0x3f63f4a9
  8001148:	44c0c000 	.word	0x44c0c000
  800114c:	2000062c 	.word	0x2000062c
  8001150:	bf800000 	.word	0xbf800000
- 8001154:	44f78000 	.word	0x44f78000
+ 8001154:	42880000 	.word	0x42880000
 
 08001158 <Read_ADC1>:
 //========================================================
@@ -9521,6 +9523,8 @@ int main(void)
  80049e2:	2b1f      	cmp	r3, #31
  80049e4:	d9ee      	bls.n	80049c4 <main+0x54>
   }
+
+
   	setDigitalOutSPI(24,0);
  80049e6:	2100      	movs	r1, #0
  80049e8:	2018      	movs	r0, #24
