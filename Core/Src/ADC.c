@@ -106,8 +106,10 @@ float ADCR(){   //TODO
 	}
 	if (res == -1)
 		return -1;
-	res -= 2045;//res -= 1820;	//смещение ноля
-	res = res * 0.0048828125;//res = res * .00875;//CMRU;/*CMRU = 0.00244 V*/
+	//res -= 2045;//res -= 1820;	//смещение ноля
+	//res = res * 0.0048828125;//res = res * .00875;//CMRU;/*CMRU = 0.00244 V*/
+	res += 68;
+	res *= 0.002436;
 	return res;
 	//  a:byte;
 //     l,h:word;
