@@ -588,7 +588,15 @@ L1:   ZnTekI[300] =  PrSab;
         delay_ms(750);
     }*/
     //делаем 20 измерений	//TODO!!!! для отладки только 5, в итоге 7
-	izmZn = ADC0();
+	izmZn = ADC0(); //1
+	HAL_Delay(1);
+	izmZn += ADC0(); //2
+	HAL_Delay(1);
+	izmZn += ADC0(); // 3
+	HAL_Delay(1);
+	izmZn += ADC0(); // 4
+
+
 
     /*j = 1;
     do{
@@ -612,6 +620,9 @@ L1:   ZnTekI[300] =  PrSab;
     //izmZn = x/20.;
     izmZn = x/7.;
 	*/
+
+	izmZn /= 4.;
+
     if (i>=1 && i < 8)
 			izmZn = izmZn * 4.00f;//7.;//4.02;//4.01	//TODO!!! другой мультиплексер
     else if (i < 14)
