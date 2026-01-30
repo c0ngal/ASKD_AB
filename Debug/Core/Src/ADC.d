@@ -28,7 +28,7 @@ Core/Src/ADC.o: ../Core/Src/ADC.c ../Core/Inc/ADC.h ../Core/Inc/UNIO.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/UART.h
+ ../Core/Inc/UART.h ../Core/Inc/global.h
 ../Core/Inc/ADC.h:
 ../Core/Inc/UNIO.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -61,3 +61,4 @@ Core/Src/ADC.o: ../Core/Src/ADC.c ../Core/Inc/ADC.h ../Core/Inc/UNIO.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/UART.h:
+../Core/Inc/global.h:

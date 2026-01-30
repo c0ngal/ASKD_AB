@@ -11,6 +11,8 @@
 #include "flash_ext.h"
 #include "Flash_SSt25.h"
 
+uint8_t vec[10]; //массив для калибровки ADC0, ADCR в режиме ТО
+
  uint8_t Rbyte;
  uint8_t ssVixA3;
  uint8_t ssVixA4;
@@ -30,6 +32,7 @@
  float ZnUakb[33];/*массив напряжений отдельно взятых аккумуляторов (24 шт.)и полного Uab *///формат Pascal =>32+1=33
  float ZnUU[21]; /*массив для усредненного замера НАПРЯЖЕНИЯ*///формат Pascal =>20+1=21
  float ZnPU[11]; /*массив для усредненного замера ТОКА*///формат Pascal =>10+1=11
+
  /* ++++ */
  //uint8_t ZnTekI[766];/*массив данных для ввода/вывода в byte-текущая инф-я*///pascal формат 765+1=766
  
@@ -911,6 +914,7 @@ L20:
 
      case 0x0400:   /*TO*/
 
+    	 processCalibrationCommands();
           if (PrTO == 0){
               Sbr(VPZ);//Сброс ком-ды "Включить ПОДЗАРЯД АБ" 
               nTO =  0;

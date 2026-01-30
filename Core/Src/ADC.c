@@ -1,8 +1,10 @@
 #include "ADC.h"
 #include "UNIO.h"
 #include "UART.h"
+#include "global.h"
 
 extern uint8_t F_DEBUG;
+
 													
 //========================================================
 // Аналого-Цифровое Преобразование с входа №0 для входов АК с 0-го по 31-й
@@ -27,8 +29,8 @@ float ADC0(){   //TODO
 		return -1;
 	//res -= 1980;//1857;//1820;	//смещение ноля 2045
 	//res = res * 0.00485;//0.00483;//TODO на макете убрана подтяжка к питанию 0ого канала// res * .00875;//CMRU;/*CMRU = 0.00244 V*/
-	res += 68;
-	res *= 0.002436;
+	res += D0;
+	res *= k0;
 	//0.00522
  	return res;
 	//  a:byte;
@@ -68,8 +70,8 @@ float Read_ADC1() { //TODO
 	}
 	if (res == -1)
 		return -1;
-	res -= 1985;//res -= 1610;	//смещение ноля 2045
-	res = res * 0.0048929;//res = res * .00367;//CMRU;/*CMRU = 0.00244 V*/0048828125
+	res -= D1;//res -= 1610;	//смещение ноля 2045
+	res = res * k1;//res = res * .00367;//CMRU;/*CMRU = 0.00244 V*/0048828125
 	return res;
 //       a:byte;
 //   h,l,s,z:word;
@@ -108,8 +110,8 @@ float ADCR(){   //TODO
 		return -1;
 	//res -= 2045;//res -= 1820;	//смещение ноля
 	//res = res * 0.0048828125;//res = res * .00875;//CMRU;/*CMRU = 0.00244 V*/
-	res += 68;
-	res *= 0.002436;
+	res += D0;
+	res *= k0;
 	return res;
 	//  a:byte;
 //     l,h:word;
@@ -127,3 +129,26 @@ float ADCR(){   //TODO
 //   h= ((h SHL 8) AND 0x0F00);
 //   rez= ((l + h) AND 0x0FFF)* CMRU;/*CMRU = 0.00244 V*/
 }
+
+uint16_t ADC0_raw(void)
+{
+    int i;
+    uint16_t r;
+    for (i = 0; i < 3; i++) {
+        r = getADC_SPI(0);
+        if (r != -1 && r != 1542) return r;
+    }
+    return -1;
+}
+
+uint16_t ADC1_raw(void)
+{
+    int i;
+    uint16_t r;
+    for (i = 0; i < 3; i++) {
+        r = getADC_SPI(1);
+        if (r != -1) return r;
+    }
+    return -1;
+}
+

@@ -589,12 +589,12 @@ L1:   ZnTekI[300] =  PrSab;
     }*/
     //делаем 20 измерений	//TODO!!!! для отладки только 5, в итоге 7
 	izmZn = ADC0(); //1
-	HAL_Delay(1);
+	/*HAL_Delay(1);
 	izmZn += ADC0(); //2
 	HAL_Delay(1);
 	izmZn += ADC0(); // 3
 	HAL_Delay(1);
-	izmZn += ADC0(); // 4
+	izmZn += ADC0(); // 4*/
 
 
 
@@ -621,7 +621,7 @@ L1:   ZnTekI[300] =  PrSab;
     izmZn = x/7.;
 	*/
 
-	izmZn /= 4.;
+	//izmZn /= 4.;
 
     if (i>=1 && i < 8)
 			izmZn = izmZn * 4.00f;//7.;//4.02;//4.01	//TODO!!! другой мультиплексер
@@ -1544,4 +1544,88 @@ void KFIzap(){
 					kRr = strtof (kSr,NULL);
  }
 /*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*/
+
+
+void processCalibrationCommands() {
+	//if (!byteAvailable()) return;
+
+	uint8_t cmd = GetByte(AdrRY);
+
+	if (cmd == 0xA1) {
+		handleWritePoint();
+	}
+	else if (cmd == 0xA2) {
+		handleCalibration();
+	}
+	else {
+		return; //пришел мусор или не та команда
+	}
+
+
+
+}
+
+void handleWritePoint(void)
+{
+	uint8_t ch = GetByte(AdrRY);
+	if (ch > 1) return; // у нас только 0 и 1
+	char d[4];
+	for (int i = 0; i < 4; i++)
+		d[i] = (char)GetByte(AdrRY);
+
+	uint16_t V = parse4digits_to_u16(d);
+
+	uint16_t A = (ch == 0) ? ADC0_raw() : ADC1_raw();
+
+	if (ch == 0) {
+		if (n0 < 2) { V0[n0] = V; A0[n0] = A; n0++; }
+	    else { V0[1] = V; A0[1] = A; }
+	} else {
+		if (n1 < 2) { V1_[n1] = V; A1_[n1] = A; n1++; }
+		else { V1_[1] = V; A1_[1] = A; }
+	}
+
+}
+
+
+void handleCalibration(void)
+{
+    uint8_t ch = GetByte(AdrRY);
+    if (ch > 1) return;
+
+    uint16_t V_a, V_b, A_a, A_b;
+
+    if (ch == 0) {
+        if (n0 < 2) return;
+        V_a = V0[0]; V_b = V0[1];
+        A_a = A0[0]; A_b = A0[1];
+    } else {
+        if (n1 < 2) return;
+        V_a = V1_[0]; V_b = V1_[1];
+        A_a = A1_[0]; A_b = A1_[1];
+    }
+
+    // чтобы не делить на ноль и не ловить мусор
+    if (A_a == A_b) return;
+
+    float Vhi = (V_a > V_b) ? (float)V_a : (float)V_b;
+    float Vlo = (V_a > V_b) ? (float)V_b : (float)V_a;
+    float Ahi = (V_a > V_b) ? (float)A_a : (float)A_b;
+    float Alo = (V_a > V_b) ? (float)A_b : (float)A_a;
+
+    float k = (Vhi - Vlo) / (Ahi - Alo);   // мВ на 1 ADC-единицу
+    float D = Vhi / k - Ahi;
+
+    if (ch == 0) { k0 = k; D0 = D; }
+    else         { k1 = k; D1 = D; }
+}
+
+
+static uint16_t parse4digits_to_u16(char d[4])
+{
+    return (uint16_t)((d[0]-'0')*1000 +
+                      (d[1]-'0')*100  +
+                      (d[2]-'0')*10   +
+                      (d[3]-'0'));
+}
 

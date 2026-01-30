@@ -1,7 +1,7 @@
 #include "global.h"
 
 const uint16_t AdrRY = 1;//номер com-порта (1 или 2) //0xFF10;/*Адрес Rg управления COM2*/
-const uint8_t KT = 0x03; //конец передачи текста
+const uint8_t KT = 0x33; //конец передачи текста
 uint8_t F_DEBUG = 0;
 
 /*Константы для DIC122 (DI)*/
@@ -30,6 +30,13 @@ const uint8_t  PR     = 0x90;//НЕ НОРМА Пр.
 const uint8_t  DDv    = 0xA0;//НЕ НОРМА ДД
 const uint8_t  Cr     = 0xC0;//НЕ НОРМА С разр.
 
+// Начальные коэффициенты для ADC0, ADCR
+float D0 = 68;
+float k0 = 0.002436;
+float D1 = 1985;
+float k1 = 0.0048929;
+
+
 
 void delay_5us(uint32_t mcsec){
 	mcsec *= 24;
@@ -39,3 +46,4 @@ void delay_5us(uint32_t mcsec){
 void delay_ms(uint32_t msec){
 	delay_5us(msec*200);
 }
+

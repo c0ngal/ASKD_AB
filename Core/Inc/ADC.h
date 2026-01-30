@@ -1,5 +1,8 @@
 #ifndef __ADC_H
 #define __ADC_H
+#include <stdint.h>                           // Include standard types
+#include <stdio.h>                            // для sprintf()
+#include <stdlib.h>
 
 /*Константы для АЦП*/
 #define  AdcY    0x88; /*Rg управления -ЗП.*/
@@ -21,5 +24,8 @@ float Read_ADC1(void);
 
 float ADCR(void);/* Аналого-Цифровое Преобразование для Riz с входа №0 АЦП CPU188R 
    диапазон "минус 5 - 0 - +5" В*/
+
+uint16_t ADC0_raw(void);
+uint16_t ADC1_raw(void);
 
 #endif //__ADC_H

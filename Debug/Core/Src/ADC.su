@@ -1,3 +1,5 @@
-../Core/Src/ADC.c:10:7:ADC0	16	static
-../Core/Src/ADC.c:53:7:Read_ADC1	16	static
-../Core/Src/ADC.c:91:7:ADCR	16	static
+../Core/Src/ADC.c:12:7:ADC0	16	static
+../Core/Src/ADC.c:55:7:Read_ADC1	16	static
+../Core/Src/ADC.c:93:7:ADCR	16	static
+../Core/Src/ADC.c:133:10:ADC0_raw	16	static
+../Core/Src/ADC.c:144:10:ADC1_raw	16	static

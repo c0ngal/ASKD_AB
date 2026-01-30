@@ -32,3 +32,7 @@
 ../Core/Src/ServiceFunctions.c:1456:6:KFUcht	32	static
 ../Core/Src/ServiceFunctions.c:1514:6:KFIzap	16	static
 ../Core/Src/ServiceFunctions.c:1528:7:KFIIcht	8	static
+../Core/Src/ServiceFunctions.c:1549:6:processCalibrationCommands	16	static
+../Core/Src/ServiceFunctions.c:1568:6:handleWritePoint	24	static
+../Core/Src/ServiceFunctions.c:1591:6:handleCalibration	48	static
+../Core/Src/ServiceFunctions.c:1624:17:parse4digits_to_u16	16	static

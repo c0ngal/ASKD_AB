@@ -156,5 +156,10 @@ void KFUcht(void);
 void KFIzap(void);
 /*========================================================*/
  void KFIIcht(void);
+
+ void processCalibrationCommands(void);
+ void handleWritePoint(void);
+ void handleCalibration(void);
+ static uint16_t parse4digits_to_u16(char d[4]);
   
  #endif //__SERVICE_FUNCTIONS_H
