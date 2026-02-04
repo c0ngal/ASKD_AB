@@ -32,7 +32,7 @@
 ../Core/Src/ServiceFunctions.c:1456:6:KFUcht	3
 ../Core/Src/ServiceFunctions.c:1514:6:KFIzap	2
 ../Core/Src/ServiceFunctions.c:1528:7:KFIIcht	1
-../Core/Src/ServiceFunctions.c:1549:6:processCalibrationCommands	3
-../Core/Src/ServiceFunctions.c:1568:6:handleWritePoint	7
-../Core/Src/ServiceFunctions.c:1591:6:handleCalibration	11
-../Core/Src/ServiceFunctions.c:1624:17:parse4digits_to_u16	1
+../Core/Src/ServiceFunctions.c:1549:6:processCalibrationCommands	5
+../Core/Src/ServiceFunctions.c:1573:6:handleWritePoint	8
+../Core/Src/ServiceFunctions.c:1602:6:handleCalibration	12
+../Core/Src/ServiceFunctions.c:1712:17:parse4digits_to_u16	1

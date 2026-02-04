@@ -1,7 +1,7 @@
 #include "global.h"
 
 const uint16_t AdrRY = 1;//номер com-порта (1 или 2) //0xFF10;/*Адрес Rg управления COM2*/
-const uint8_t KT = 0x33; //конец передачи текста
+const uint8_t KT = 0x03; //конец передачи текста
 uint8_t F_DEBUG = 0;
 
 /*Константы для DIC122 (DI)*/

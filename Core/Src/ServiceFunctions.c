@@ -1548,13 +1548,18 @@ void KFIzap(){
 
 void processCalibrationCommands() {
 	//if (!byteAvailable()) return;
+	 uint16_t r = 1;
+	 int cr = r;
+	 while (ZnX[cr] != '1' && ZnX[cr] == '2') ++cr;
+	 int i = cr + 1;
+	 int j = 2;
 
-	uint8_t cmd = GetByte(AdrRY);
+	uint8_t cmd = ZnX[cr];
 
-	if (cmd == 0xA1) {
+	if (cmd == 0x31) { //1
 		handleWritePoint();
 	}
-	else if (cmd == 0xA2) {
+	else if (cmd == 0x32) { //2
 		handleCalibration();
 	}
 	else {
@@ -1565,13 +1570,96 @@ void processCalibrationCommands() {
 
 }
 
-void handleWritePoint(void)
+void handleWritePoint(void) {
+	 uint16_t r = 1;
+	 int cr = r;
+	 while (ZnX[cr] != '1') ++cr;
+	 int i = cr + 1;
+	 int j = 2;
+
+	 uint8_t ch = ZnX[i++];
+
+	 if (ch - '0' > 1) return; // у нас только 0 и 1
+
+	 char d[4];
+	 for (int k = 0; k < 4; ++k) d[k] = ZnX[i++];
+	 uint16_t V = parse4digits_to_u16(d);
+
+	 uint16_t A = (ch == 0) ? ADC0_raw() : ADC1_raw();
+
+	 if (ch - '0' == 0) {
+	 	if (n0 < 2) { V0[n0] = V; A0[n0] = A; n0++; }
+	 	else { V0[1] = V; A0[1] = A; }
+
+	 } else {
+	 	if (n1 < 2) { V1_[n1] = V; A1_[n1] = A; n1++; }
+	 	else { V1_[1] = V; A1_[1] = A; }
+	 }
+
+	 SendByte(AdrRY, '1');
+}
+
+void handleCalibration(void) {
+	 uint16_t r = 1;
+	 int cr = r;
+	 while (ZnX[cr] != '2') ++cr;
+	 int i = cr + 1;
+	 int j = 2;
+
+	 uint8_t ch = ZnX[i];
+
+	 if (ch - '0' > 1) return; // у нас только 0 и 1
+
+	 uint16_t V_a, V_b, A_a, A_b;
+
+	 if (ch - '0' == 0) {
+		 if (n0 < 2) return;
+	     V_a = V0[0]; V_b = V0[1];
+	     A_a = A0[0]; A_b = A0[1];
+
+	 }
+
+	 else {
+	         if (n1 < 2) return;
+	         V_a = V1_[0]; V_b = V1_[1];
+	         A_a = A1_[0]; A_b = A1_[1];
+	     }
+
+	     // чтобы не делить на ноль и не ловить мусор
+	  if (A_a == A_b) return;
+
+	  float Vhi = (V_a > V_b) ? (float)V_a : (float)V_b;
+	  float Vlo = (V_a > V_b) ? (float)V_b : (float)V_a;
+	  /*float Ahi = (V_a > V_b) ? (float)A_a : (float)A_b;
+	  float Alo = (V_a > V_b) ? (float)A_b : (float)A_a;*/
+	  float Ahi = (A_a > A_b) ? (float)A_a : (float)A_b;
+	  float Alo = (A_a < A_b) ? (float)A_a : (float)A_b;
+
+	  float k = (Vhi - Vlo) / (Ahi - Alo);   // мВ на 1 ADC-единицу
+	  float D = Vhi / k - Ahi;
+
+	  k /= 1000.;
+
+	  if (ch - '0' == 0) { k0 = k; D0 = D; }
+	  else         { k1 = k; D1 = D; }
+
+	  float zn = ADC0();
+
+	  SendByte(AdrRY, '2');
+}
+
+
+
+/////////////
+/*void handleWritePoint(void)
 {
-	uint8_t ch = GetByte(AdrRY);
+	//uint8_t ch = GetByte(AdrRY);
+	uint8_t ch = ZxX[i];
 	if (ch > 1) return; // у нас только 0 и 1
 	char d[4];
 	for (int i = 0; i < 4; i++)
 		d[i] = (char)GetByte(AdrRY);
+
 
 	uint16_t V = parse4digits_to_u16(d);
 
@@ -1619,7 +1707,7 @@ void handleCalibration(void)
     if (ch == 0) { k0 = k; D0 = D; }
     else         { k1 = k; D1 = D; }
 }
-
+*/
 
 static uint16_t parse4digits_to_u16(char d[4])
 {

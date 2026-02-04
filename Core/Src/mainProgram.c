@@ -914,7 +914,6 @@ L20:
 
      case 0x0400:   /*TO*/
 
-    	 processCalibrationCommands();
           if (PrTO == 0){
               Sbr(VPZ);//Сброс ком-ды "Включить ПОДЗАРЯД АБ" 
               nTO =  0;
@@ -1777,7 +1776,7 @@ L73:
 /* do{ //TODO1
         //c = (Lo(portw[AdrRY + 2] & RxD));
     }while(c > 0);*/
-	//memset(ZnX, '0', 129);
+	memset(ZnX, 0, 129);
 		ZnX[1] = GetByte(AdrRY);
 		if (ZnX[1] == 0) goto L73;
 		i = 2;
@@ -1799,6 +1798,8 @@ L74:  Rbyte = GetByte(AdrRY);
   d = ZnX[1];
 
   switch (d){
+  case 0x31 : { handleWritePoint(); goto L37; } // 1
+  case 0x32 : { handleCalibration(); goto L37; } // 2
   case 0x52 : goto L75; //break;/*R - вывод текущего времени */
   case 0x4E : goto L23; //break;/*N - заводской номер*/
   case 0x4D : goto L24; //break;/*M - запрос на чтение зав.№ и даты изготовл. при запуске*/

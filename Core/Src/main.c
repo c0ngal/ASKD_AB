@@ -350,6 +350,8 @@ WTekI();
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+
 	  //uint8_t rec[255];
 	  //for (uint32_t i = 0; i < 255; ++i) ZnArxI[i] = i;
 	  //fMemoryArxROverWrite = 0;

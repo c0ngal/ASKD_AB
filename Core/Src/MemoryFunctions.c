@@ -311,6 +311,7 @@ void RTekI(void){
 
      uint32_t addr = ADR_ARXI + (uint32_t)adrArxI * RECORD_SIZE;
 
+
      if ((addr % FLASH_SECTOR_SIZE) == 0){
          //flash_erase_sector(addr);
     	 Sector4KB_Erase(addr);
@@ -318,8 +319,8 @@ void RTekI(void){
 
      // Запись 256 байт (Pascal: 1..255)
      //flash_write(addr, &ZnArxI[1], 255);
-     Flash_PageProgram(addr, &ZnArxI[1], 255);
 
+     Flash_PageProgram(addr, &ZnArxI[1], 255);
      // сдвиг адреса/переполнение
      adrArxI++;
      if (adrArxI >= 3*1024){

@@ -31,6 +31,6 @@ void EraseArx(void);
 void EraseTekI(void);
 void InitMemory(void);
 
-
+static void read_record(uint32_t base, uint32_t index);
 
 #endif //__MEMORY_FUNCTIONS_H
